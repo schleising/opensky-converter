@@ -1,10 +1,10 @@
 
 
-## Main Window Workflow
+## Flowchart
 
 ```mermaid
 flowchart TD
-    A(Open Application) --> B[Display Main Window]
+    A(Open Application) --> B[Initialise Main Window]
     B --> C[Disable All Buttons]
     C --> D[Enable Current Filename Button]
     C --> E[Enable New Filename Button]
@@ -17,8 +17,10 @@ flowchart TD
     I -->|Select Set Mapping| J[Open Mapping Dialog]
     J -->|Mapping Cancelled| I
     J -->|Mapping Accepted| K[Enable Convert Button]
-    K -->|Select Convert| L[Open Progress Window]
-    L --> M[Conversion Complete]
+    K -->|Select Convert| L[Open Progress Dialog]
+    L -->|Failure| O[Display Error Dialog]
+    O -->|Select OK| B
+    L -->|Success| M[Conversion Complete]
     G -->|Select Close| N(Close Application)
     H -->|Select Close| N(Close Application)
     I -->|Select Close| N(Close Application)

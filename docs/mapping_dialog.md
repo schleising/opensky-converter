@@ -1,8 +1,8 @@
-## Mapping Dialog Workflow
+## Flowchart
 
 ```mermaid
 flowchart TD
-    A(Open Mapping Window) --> B[Display List of IRCA Fields]
+    A(Open Mapping Dialog) --> B[Display List of IRCA Fields]
     B --> C[Add New Fields to Dropdown for Each IRCA Field]
     C --> D[Read Default Mapping from File]
     D --> E[Set Each Dropdown to Default]
