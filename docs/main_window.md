@@ -27,3 +27,5 @@ flowchart TD
     K -->|Select Close| N(Close Application)
     M -->|Select Close| N(Close Application)
 ```
+
+[![Main Window](Design/Main%20Window.png)](main_window.md)

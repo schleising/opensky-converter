@@ -14,3 +14,5 @@ flowchart TD
     G -->|Select Accept Mapping| I[Close Mapping Dialog]
     G -->|Select Cancel| I[Close Mapping Dialog]
 ```
+
+[![Mapping Dialog](Design/Mapping%20Dialog.png)](mapping_dialog.md)
