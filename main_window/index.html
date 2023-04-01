@@ -67,7 +67,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#main-window-workflow" class="md-skip">
+        <a href="#flowchart" class="md-skip">
           Skip to content
         </a>
       
@@ -204,6 +204,35 @@
     
   
   
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          Flowcharts
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Flowcharts
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
     <li class="md-nav__item md-nav__item--active">
       
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
@@ -233,8 +262,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#main-window-workflow" class="md-nav__link">
-    Main Window Workflow
+  <a href="#flowchart" class="md-nav__link">
+    Flowchart
   </a>
   
 </li>
@@ -246,11 +275,10 @@
     </li>
   
 
-    
-      
-      
-      
-
+            
+          
+            
+              
   
   
   
@@ -258,6 +286,27 @@
       <a href="../mapping_dialog/" class="md-nav__link">
         Mapping Dialog
       </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../conversion_process/" class="md-nav__link">
+        Conversion Process
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -287,8 +336,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#main-window-workflow" class="md-nav__link">
-    Main Window Workflow
+  <a href="#flowchart" class="md-nav__link">
+    Flowchart
   </a>
   
 </li>
@@ -310,9 +359,9 @@
 
   <h1>Main Window</h1>
 
-<h2 id="main-window-workflow">Main Window Workflow</h2>
+<h2 id="flowchart">Flowchart</h2>
 <pre class="mermaid"><code>flowchart TD
-    A(Open Application) --&gt; B[Display Main Window]
+    A(Open Application) --&gt; B[Initialise Main Window]
     B --&gt; C[Disable All Buttons]
     C --&gt; D[Enable Current Filename Button]
     C --&gt; E[Enable New Filename Button]
@@ -325,8 +374,10 @@
     I --&gt;|Select Set Mapping| J[Open Mapping Dialog]
     J --&gt;|Mapping Cancelled| I
     J --&gt;|Mapping Accepted| K[Enable Convert Button]
-    K --&gt;|Select Convert| L[Open Progress Window]
-    L --&gt; M[Conversion Complete]
+    K --&gt;|Select Convert| L[Open Progress Dialog]
+    L --&gt;|Failure| O[Display Error Dialog]
+    O --&gt;|Select OK| B
+    L --&gt;|Success| M[Conversion Complete]
     G --&gt;|Select Close| N(Close Application)
     H --&gt;|Select Close| N(Close Application)
     I --&gt;|Select Close| N(Close Application)
