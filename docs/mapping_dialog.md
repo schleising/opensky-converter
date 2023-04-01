@@ -12,5 +12,5 @@ flowchart TD
     G -->|Select Save as Default| H[Save Mapping to File]
     H --> G
     G -->|Select Accept Mapping| I[Close Mapping Dialog]
-    G -->|Select Cancel| J[Close Mapping Dialog]
+    G -->|Select Cancel| I[Close Mapping Dialog]
 ```

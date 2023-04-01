@@ -17,5 +17,7 @@ markdown_extensions:
 
 nav:
   - Home: index.md
-  - Main Window: main_window.md
-  - Mapping Dialog: mapping_dialog.md
+  - Flowcharts:
+    - Main Window: main_window.md
+    - Mapping Dialog: mapping_dialog.md
+    - Conversion Process: conversion_process.md
