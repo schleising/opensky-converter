@@ -5,6 +5,8 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import filedialog
 
+from . import MappingDialog
+
 class MainWindow:
     def __init__(self, root: tk.Tk) -> None:
         """Creates the main window for the application."""
@@ -74,6 +76,13 @@ class MainWindow:
         # Set the padding for all widgets
         for child in frame.winfo_children():
             child.grid_configure(padx=5, pady=5)
+
+        # Create the mapping dialog object
+        self.mapping_dialog = MappingDialog(self.root)
+
+        # Bind the mapping dialog events
+        self.root.bind('<<MappingAccepted>>', self.mapping_accepted)
+        self.root.bind('<<MappingRejected>>', self.mapping_rejected)
 
     def check_enable_buttons(self) -> None:
         """Checks if the buttons should be enabled or disabled."""
@@ -146,7 +155,19 @@ class MainWindow:
             self.check_enable_buttons()
 
     def set_mapping(self) -> None:
-        pass
+        """Opens the set mapping dialog"""
+        # Show the mapping dialog
+        self.mapping_dialog.show(self.new_file_path)
+
+    def mapping_accepted(self, _) -> None:
+        """Enables the convert button when the mapping is accepted."""
+        # Enable the convert button
+        self.convert_button.configure(state=tk.NORMAL)
+
+    def mapping_rejected(self, _) -> None:
+        """Disables the convert button when the mapping is rejected."""
+        # Disable the convert button
+        self.convert_button.configure(state=tk.DISABLED)
 
     def convert(self) -> None:
         pass
