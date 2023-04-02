@@ -11,7 +11,7 @@ class MainWindow:
         self.root = root
 
         # Set the window title
-        self.root.title('Aircraft Database Converter')
+        self.root.title('Aircraft DB Converter')
 
         # Disable resizing the window
         self.root.resizable(False, False)
