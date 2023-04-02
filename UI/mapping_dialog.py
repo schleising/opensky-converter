@@ -1,3 +1,12 @@
+"""Contains the mapping dialog class.
+
+This module contains the mapping dialog class, which is used to map the fields in the new file to the fields in the IRCA file.
+
+Classes:
+    MappingDialog: The mapping dialog class.
+"""
+
+
 import csv
 import json
 from pathlib import Path

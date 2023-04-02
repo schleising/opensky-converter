@@ -1,3 +1,11 @@
+"""Main window for the application.
+
+This module contains the main window for the application.
+
+Classes:
+    MainWindow: The main window for the application.
+"""
+
 from pathlib import Path
 from typing import Any
 
@@ -9,7 +17,11 @@ from . import MappingDialog
 
 class MainWindow:
     def __init__(self, root: tk.Tk) -> None:
-        """Creates the main window for the application."""
+        """Creates the main window.
+
+        Args:
+            root (tk.Tk): The root window.
+        """
         self.root = root
 
         # Set the window title
@@ -170,17 +182,9 @@ class MainWindow:
         self.convert_button.configure(state=tk.DISABLED)
 
     def convert(self) -> None:
+        """To be implemented"""
         pass
 
     def reset_to_defaults(self) -> None:
+        """To be implemented"""
         pass
-
-if __name__ == '__main__':
-    # Create the root window
-    root = tk.Tk()
-
-    # Create the main window
-    MainWindow(root)
-
-    # Start the main loop
-    root.mainloop()

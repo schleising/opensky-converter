@@ -5,6 +5,9 @@ theme:
   features:
     - navigation.footer
 
+plugins:
+  - mkdocstrings
+
 markdown_extensions:
   - admonition
   - pymdownx.superfences:
@@ -24,3 +27,6 @@ nav:
     - Mapping Dialog: mapping_dialog.md
     - Conversion Process: conversion_process.md
     - Reset to Defaults Dialog: reset_to_defaults.md
+  - Reference:
+    - Main Window: reference/main_window.md
+    - Mapping Dialog: reference/mapping_dialog.md
