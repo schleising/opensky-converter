@@ -2,6 +2,8 @@ site_name: OpenSky Converter
 
 theme:
   name: material
+  features:
+    - navigation.footer
 
 markdown_extensions:
   - admonition
@@ -21,3 +23,4 @@ nav:
     - Main Window: main_window.md
     - Mapping Dialog: mapping_dialog.md
     - Conversion Process: conversion_process.md
+    - Reset to Defaults Dialog: reset_to_defaults.md

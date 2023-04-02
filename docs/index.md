@@ -21,3 +21,8 @@ Click image to see flowchart
 Click image to see flowchart
 
 [![Progress Dialog](Design/Progress%20Dialog.png)](conversion_process.md)
+
+### Reset to Defaults Dialog
+Click image to see flowchart
+
+[![Reset to Defaults](Design/Reset%20to%20Default%20Dialog.png)](reset_to_defaults.md)

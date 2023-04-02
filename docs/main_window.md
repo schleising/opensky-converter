@@ -26,6 +26,8 @@ flowchart TD
     I -->|Select Close| N(Close Application)
     K -->|Select Close| N(Close Application)
     M -->|Select Close| N(Close Application)
+    G -->|Select Reset to Defaults| P[Open Reset to Defaults Dialog]
+    P --> G
 ```
 
 [![Main Window](Design/Main%20Window.png)](main_window.md)
