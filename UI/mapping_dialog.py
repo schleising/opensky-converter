@@ -25,9 +25,14 @@ class MappingDialog():
         Args:
             parent (tk.Tk): The parent window.
         """
+        # Store the parent window
         self.parent = parent
 
+        # Set the path to the default mapping file
         self.default_mapping_path = Path('defaults/default_mapping.json')
+
+        # Initailise the mapping dictionary to None
+        self.mapping: Dict[str, str] | None = None
 
     def show(self, new_file_path: Path) -> None:
         """Shows the mapping dialog.
@@ -134,6 +139,9 @@ class MappingDialog():
     def mapping_accepted(self):
         """Handles the mapping being accepted.
         """
+        # Get the new mapping
+        self.mapping = {field: mapping.get() for field, mapping in self.combobox_dict.items()}
+
         # Generate the mapping accepted event
         self.parent.event_generate('<<MappingAccepted>>', when='tail')
 

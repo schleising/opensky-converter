@@ -6,12 +6,11 @@ Classes:
     MainWindow: The main window for the application.
 """
 
+import json
 from pathlib import Path
-from typing import Any
 
 import tkinter as tk
-from tkinter import ttk
-from tkinter import filedialog
+from tkinter import ttk, filedialog, messagebox
 
 from . import MappingDialog
 
@@ -183,7 +182,10 @@ class MainWindow:
 
     def convert(self) -> None:
         """To be implemented"""
-        pass
+        if self.mapping_dialog.mapping is not None:
+            print(json.dumps(self.mapping_dialog.mapping, indent=2))
+        else:
+            messagebox.showerror('Error', 'No mapping has been set.')
 
     def reset_to_defaults(self) -> None:
         """To be implemented"""
