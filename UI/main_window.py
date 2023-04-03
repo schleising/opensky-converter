@@ -47,17 +47,17 @@ class MainWindow:
         # Create the entry boxes
         self.current_file_text = tk.StringVar()
         self.current_file_path = Path()
-        self.current_file_entry = ttk.Entry(frame, width=20, state='readonly', textvariable=self.current_file_text)
+        self.current_file_entry = ttk.Entry(frame, width=30, state='readonly', textvariable=self.current_file_text)
         self.current_file_entry.grid(column=1, row=0, sticky=tk.EW)
 
         self.new_file_text = tk.StringVar()
         self.new_file_path = Path()
-        self.new_file_entry = ttk.Entry(frame, width=20, state='readonly', textvariable=self.new_file_text)
+        self.new_file_entry = ttk.Entry(frame, width=30, state='readonly', textvariable=self.new_file_text)
         self.new_file_entry.grid(column=1, row=1, sticky=tk.EW)
 
         self.output_file_text = tk.StringVar()
         self.output_file_path = Path()
-        self.output_file_entry = ttk.Entry(frame, width=20, state='readonly', textvariable=self.output_file_text)
+        self.output_file_entry = ttk.Entry(frame, width=30, state='readonly', textvariable=self.output_file_text)
         self.output_file_entry.grid(column=1, row=2, sticky=tk.EW)
 
         # Create the buttons
@@ -77,7 +77,7 @@ class MainWindow:
         self.convert_button.grid(column=2, row=4, sticky=tk.EW)
 
         self.reset_to_defaults_button = ttk.Button(frame, text='Reset to Defaults', command=self.reset_to_defaults)
-        self.reset_to_defaults_button.grid(column=1, row=5, sticky='W')
+        self.reset_to_defaults_button.grid(column=0, columnspan=2, row=5, sticky='W')
 
         self.close_button = ttk.Button(frame, text='Close', command=self.root.destroy)
         self.close_button.grid(column=2, row=5, sticky=tk.EW)
