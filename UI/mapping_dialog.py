@@ -104,6 +104,13 @@ class MappingDialog():
             # Apply padding to all children
             for child in frame.winfo_children():
                 child.grid_configure(padx=5, pady=5)
+
+            # Set the dialog to be transient
+            self.dialog.transient(self.parent)
+
+            # Set the dialog to be modal
+            self.dialog.grab_set()
+
         else:
             # If there are no fieldnames, show an error message
             messagebox.showerror('Error', 'No fields found in new file')
@@ -130,14 +137,23 @@ class MappingDialog():
         # Generate the mapping accepted event
         self.parent.event_generate('<<MappingAccepted>>', when='tail')
 
-        # Destroy the dialog
-        self.dialog.destroy()
+        # Close the dialog
+        self.close_dialog()
 
     def mapping_rejected(self):
         """Handles the mapping being rejected.
         """
         # Generate the mapping rejected event
         self.parent.event_generate('<<MappingRejected>>', when='tail')
+
+        # Close the dialog
+        self.close_dialog()
+
+    def close_dialog(self):
+        """Closes the dialog.
+        """
+        # Release the parent window
+        self.dialog.grab_release()
 
         # Destroy the dialog
         self.dialog.destroy()
