@@ -6,13 +6,13 @@ Classes:
     MainWindow: The main window for the application.
 """
 
-import json
 from pathlib import Path
 
 import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
+from tkinter.simpledialog import _setup_dialog # type: ignore
 
-from . import MappingDialog
+from . import MappingDialog, ProgressDialog
 
 class MainWindow:
     def __init__(self, root: tk.Tk) -> None:
@@ -25,6 +25,9 @@ class MainWindow:
 
         # Set the window title
         self.root.title('Aircraft DB Converter')
+
+        # Remove normal window decorations
+        _setup_dialog(self.root)
 
         # Disable resizing the window
         self.root.resizable(False, False)
@@ -183,7 +186,7 @@ class MainWindow:
     def convert(self) -> None:
         """To be implemented"""
         if self.mapping_dialog.mapping is not None:
-            print(json.dumps(self.mapping_dialog.mapping, indent=2))
+            ProgressDialog(self.root)
         else:
             messagebox.showerror('Error', 'No mapping has been set.')
 

@@ -13,8 +13,8 @@ from pathlib import Path
 from typing import Dict
 
 import tkinter as tk
-from tkinter import messagebox
-from tkinter import ttk
+from tkinter import ttk, messagebox
+from tkinter.simpledialog import _setup_dialog # type: ignore
 
 from .constants import ORIGINAL_IRCA_MAPPING
 
@@ -46,6 +46,9 @@ class MappingDialog():
 
         # Set the title
         self.dialog.title('Map Fields')
+
+        # Remove normal window decorations
+        _setup_dialog(self.dialog)
 
         # Create an empty dictionary to store the combobox variables
         self.combobox_dict: Dict[str, tk.StringVar] = {}
@@ -113,8 +116,14 @@ class MappingDialog():
             # Set the dialog to be transient
             self.dialog.transient(self.parent)
 
+            # Wait for the dialog to be visible
+            self.dialog.wait_visibility()
+
             # Set the dialog to be modal
             self.dialog.grab_set()
+
+            # Disable the parent window
+            self.dialog.wait_window(self.dialog)
 
         else:
             # If there are no fieldnames, show an error message
