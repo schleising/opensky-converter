@@ -10,7 +10,7 @@ Classes:
 import csv
 import json
 from pathlib import Path
-from typing import Dict
+from typing import Dict, Union
 
 import tkinter as tk
 from tkinter import ttk, messagebox
@@ -32,7 +32,7 @@ class MappingDialog():
         self.default_mapping_path = Path('defaults/default_mapping.json')
 
         # Initailise the mapping dictionary to None
-        self.mapping: Dict[str, str] | None = None
+        self.mapping: Union[Dict[str, str], None] = None
 
     def show(self, new_file_path: Path) -> None:
         """Shows the mapping dialog.
