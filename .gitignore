@@ -131,3 +131,4 @@ dmypy.json
 # Local ignores
 database
 .DS_Store
+opensky-converter-log.txt
