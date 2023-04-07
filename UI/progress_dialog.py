@@ -101,6 +101,53 @@ class ProgressDialog:
             if still_reading:
                 # Continue reading the current file
                 self.parent.after(1, self.read_current_file)
+            else:
+                # Initialise the new file
+                self.converter.initialise_new_file()
+
+                # Start merging the new file
+                self.parent.after(1, self.merge_new_file)
+
+    def merge_new_file(self) -> None:
+        """Merges the new file."""
+        # Check if the conversion has been cancelled
+        if not self.conversion_cancelled:
+            # Merge the new file
+            percentage_merged, still_merging = self.converter.merge_new_file()
+
+            logging.debug(f'New File: {percentage_merged:3.2f}%, Still Merging: {still_merging}')
+
+            # Update the progress bar
+            self.new_file_progress_bar['value'] = percentage_merged
+
+            if still_merging:
+                # Continue merging the new file
+                self.parent.after(1, self.merge_new_file)
+            else:
+                # Initialise the output file
+                self.converter.initialise_output_file()
+
+                # Start writing the output file
+                self.parent.after(1, self.write_output_file)
+
+    def write_output_file(self) -> None:
+        """Writes the output file."""
+        # Check if the conversion has been cancelled
+        if not self.conversion_cancelled:
+            # Write the output file
+            percentage_written, still_writing = self.converter.write_output_file()
+
+            logging.debug(f'Output File: {percentage_written:3.2f}%, Still Writing: {still_writing}')
+
+            # Update the progress bar
+            self.output_file_progress_bar['value'] = percentage_written
+
+            if still_writing:
+                # Continue writing the output file
+                self.parent.after(1, self.write_output_file)
+            else:
+                # Destroy the dialog
+                self.cancel_button.configure(text='Close')
 
     def cancel(self) -> None:
         """Cancels the conversion."""
