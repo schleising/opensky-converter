@@ -1,4 +1,7 @@
 # The original IRCA mapping, used if the default mapping file doesn't exist or the user chooses to reset the mapping
+
+from pathlib import Path
+
 ORIGINAL_IRCA_MAPPING = {
     'icao24': 'icao24',
     'registration': 'registration',
@@ -28,3 +31,5 @@ ORIGINAL_IRCA_MAPPING = {
     'notes': 'notes',
     'categoryDescription': 'categoryDescription',
 }
+
+DEFAULT_MAPPING_PATH = Path('defaults/default_mapping.json')

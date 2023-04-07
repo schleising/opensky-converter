@@ -13,7 +13,7 @@ import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
 from tkinter.simpledialog import _setup_dialog # type: ignore
 
-from . import MappingDialog, ProgressDialog
+from . import MappingDialog, ProgressDialog, ResetToDefaultsDialog
 
 class MainWindow:
     def __init__(self, root: tk.Tk) -> None:
@@ -188,12 +188,12 @@ class MainWindow:
         self.convert_button.configure(state=tk.DISABLED)
 
     def convert(self) -> None:
-        """To be implemented"""
+        """Converts the current file to the new file."""
         if self.mapping_dialog.mapping is not None:
             ProgressDialog(self.root, self.current_file_path, self.new_file_path, self.output_file_path, self.mapping_dialog.mapping)
         else:
             messagebox.showerror('Error', 'No mapping has been set.')
 
     def reset_to_defaults(self) -> None:
-        """To be implemented"""
-        pass
+        """Resets the current file and mapping to the defaults."""
+        ResetToDefaultsDialog(self.root)

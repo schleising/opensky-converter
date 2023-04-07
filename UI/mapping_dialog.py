@@ -17,7 +17,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from tkinter.simpledialog import _setup_dialog # type: ignore
 
-from .constants import ORIGINAL_IRCA_MAPPING
+from .constants import ORIGINAL_IRCA_MAPPING, DEFAULT_MAPPING_PATH
 
 class MappingDialog():
     def __init__(self, parent: tk.Tk):
@@ -28,9 +28,6 @@ class MappingDialog():
         """
         # Store the parent window
         self.parent = parent
-
-        # Set the path to the default mapping file
-        self.default_mapping_path = Path('defaults/default_mapping.json')
 
         # Initailise the mapping dictionary to None
         self.mapping: Union[Dict[str, str], None] = None
@@ -73,8 +70,8 @@ class MappingDialog():
             last_row = 0
 
             # Read the default mapping file, using the original mapping if the file doesn't exist
-            if self.default_mapping_path.is_file():
-                with self.default_mapping_path.open('r', encoding='utf8') as default_mapping_file:
+            if DEFAULT_MAPPING_PATH.is_file():
+                with DEFAULT_MAPPING_PATH.open('r', encoding='utf8') as default_mapping_file:
                     self.irca_mapping = json.load(default_mapping_file)
             else:
                 self.irca_mapping = ORIGINAL_IRCA_MAPPING
@@ -143,10 +140,10 @@ class MappingDialog():
         new_mapping = {field: mapping.get() for field, mapping in self.combobox_dict.items()}
 
         # Create the defaults directory if it doesn't exist
-        self.default_mapping_path.parent.mkdir(parents=True, exist_ok=True)
+        DEFAULT_MAPPING_PATH.parent.mkdir(parents=True, exist_ok=True)
 
         # Save the new mapping
-        with self.default_mapping_path.open('w', encoding='utf8') as default_mapping_file:
+        with DEFAULT_MAPPING_PATH.open('w', encoding='utf8') as default_mapping_file:
             json.dump(new_mapping, default_mapping_file, indent=2)
 
         # Show a success message
