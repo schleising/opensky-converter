@@ -1,78 +1,99 @@
 import csv
+from pathlib import Path
+from typing import Dict, Tuple
+from datetime import datetime, timedelta
 
-import tkinter as tk
-from tkinter import ttk
-from tkinter import filedialog
+REFRESH_TIME = 100 # The time in milliseconds to wait before refreshing the progress bars
 
 class Converter:
-    def __init__(self) -> None:
-        self.app = tk.Tk()
+    def __init__(self, current_file_path: Path, new_file_path: Path, output_file_path: Path, mapping: Dict[str, str]) -> None:
+        """Merges the New File into the Current File and outputs the result to the Output File.
 
-        self.frame1 = ttk.Frame(master=self.app)
-        self.frame2 = ttk.Frame(master=self.app)
+        Args:
+            current_filename (Path): The existing aircraft database file.
+            new_filename (Path): The file containing new data to be merged into the existing database.
+            output_filename (Path): The file to output the merged data to.
+            mapping (Dict[str, str]): The mapping of the new file's fieldnames to the current file's fieldnames.
+        """
+        self.current_file_path = current_file_path
+        self.new_file_path = new_file_path
+        self.output_file_path = output_file_path
+        self.mapping = mapping
 
-        self.frame1.grid(column=0, row=0)
-        self.frame2.grid(column=0, row=1)
+        self.current_file_lines = 0
 
-        self.open_button = ttk.Button(master=self.frame1, text='Open', command=self.open_file)
-        self.open_button.grid(column=0, row=0)
+        with open(self.new_file_path, 'r') as new_file:
+            self.new_file_lines = len(new_file.readlines())
 
-        self.convert_button = ttk.Button(master=self.frame1, text='Convert', command=self.convert_file)
-        self.convert_button.grid(column=1, row=0)
-        self.convert_button.config(state=tk.DISABLED)
+        # Open the current file
+        self.current_file = open(self.current_file_path, 'r', encoding='utf-8', newline='')
 
-        self.progress_bar = ttk.Progressbar(master=self.frame2, mode='determinate')
-        self.progress_bar.grid(column=0, row=0)
+        # Create a reader for the current file
+        self.current_file_reader = csv.DictReader(self.current_file)
 
-        self.app.mainloop()
+        # Open the new file
+        self.new_file = open(self.new_file_path, 'r', encoding='utf-8', newline='')
 
-    def open_file(self) -> None:
-        self.open_button.config(state=tk.DISABLED)
+        # Create a reader for the new file
+        self.new_file_reader = csv.DictReader(self.new_file)
 
-        self.filename = filedialog.askopenfilename(defaultextension='csv', initialdir='database')
+        # Open the output file
+        self.output_file = open(self.output_file_path, 'w', encoding='utf-8', newline='')
 
-        if self.filename != '':
-            self.convert_button.config(state=tk.NORMAL)
+    def initialise_current_file(self) -> None:
+        # Get the number of lines in the original file and the new file
+        with open(self.current_file_path, 'r') as current_file:
+            self.current_file_lines = len(current_file.readlines())
 
-        self.open_button.config(state=tk.NORMAL)
+        # Initialise the number of lines read to 0
+        self.lines_read = 0
 
-    def convert_file(self) -> None:
-        self.open_button.config(state=tk.DISABLED)
-        self.convert_button.config(state=tk.DISABLED)
+    def read_current_file(self) -> Tuple[float, bool]:
+        """Reads the current file."""
 
-        output_filename = filedialog.asksaveasfilename(confirmoverwrite=True, defaultextension='csv', initialdir='database')
+        # Get the start time
+        start_time = datetime.now()
 
-        with open(self.filename, 'r', encoding='utf8') as input_file:
-            with open(output_filename, 'w', encoding='utf8') as output_file:
-                line_count = len(input_file.readlines()) - 1
-                print(line_count)
+        # Run for 100 milliseconds
+        while datetime.now() - start_time < timedelta(milliseconds=REFRESH_TIME):
+            # Check if the file is closed
+            if self.current_file.closed:
+                break
 
-                input_file.seek(0)
+            # Read the next line
+            try:
+                next(self.current_file_reader)
+            except StopIteration:
+                # Close the current file
+                self.current_file.close()
 
-                reader = csv.DictReader(input_file)
+                # Break out of the loop
+                break
 
-                if reader.fieldnames is not None:
-                    fieldnames = reader.fieldnames
-                else:
-                    fieldnames = []
+            except csv.Error:
+                # Ignore this line
+                pass
 
-                writer = csv.DictWriter(output_file, fieldnames=fieldnames)
+            # Increment the number of lines read
+            self.lines_read += 1
 
-                writer.writeheader()
+        # Return the number of lines read
+        return (self.lines_read / self.current_file_lines) * 100, not self.current_file.closed
 
-                output_list: list[dict[str, str]] = []
+    def merge_new_file(self) -> None:
+        """Merges the new file."""
+        pass
 
-                for line_number, row in enumerate(reader):
-                    output_list.append(row)
-                    if (line_number % 10000) == 0:
-                        writer.writerows(output_list)
-                        output_list.clear()
-                        print(line_number)
-                        self.progress_bar['value'] = int((line_number / line_count) * 100)
-                        self.progress_bar.update()
+    def conversion_cancelled(self) -> None:
+        """Called when the user cancels the conversion."""
+        # Close the current file
+        if not self.current_file.closed:
+            self.current_file.close()
 
-                writer.writerows(output_list)
-                output_list.clear()
+        # Close the new file
+        if not self.new_file.closed:
+            self.new_file.close()
 
-        self.convert_button.config(state=tk.NORMAL)
-        self.open_button.config(state=tk.NORMAL)
+        # Close the output file
+        if not self.output_file.closed:
+            self.output_file.close()
