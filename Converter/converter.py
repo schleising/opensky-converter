@@ -40,6 +40,9 @@ class Converter:
         # Open the output file
         self.output_file = open(self.output_file_path, 'w', encoding='utf-8', newline='')
 
+        # Initialise an empty dictionary to store the current file's data
+        self.current_file_data: Dict[str, Dict[str, str]] = {}
+
     def initialise_current_file(self) -> None:
         # Get the number of lines in the original file and the new file
         with open(self.current_file_path, 'r') as current_file:
@@ -60,9 +63,15 @@ class Converter:
             if self.current_file.closed:
                 break
 
-            # Read the next line
+            # Try to read the next line
             try:
-                next(self.current_file_reader)
+                # Get the next row
+                row = next(self.current_file_reader)
+
+                # Add the row to the dictionary
+                if row['icao24'] in row:
+                    self.current_file_data[row['icao24']] = row
+
             except StopIteration:
                 # Close the current file
                 self.current_file.close()
