@@ -1,6 +1,7 @@
 """Creates a progress dialog for the user to see the progress of the conversion.
 """
 
+import logging
 from pathlib import Path
 from typing import Dict
 
@@ -92,7 +93,7 @@ class ProgressDialog:
             # Read the current file
             percentage_read, still_reading = self.converter.read_current_file()
 
-            print(f'Current File: {percentage_read:3.2f}%')
+            logging.debug(f'Current File: {percentage_read:3.2f}%, Still Reading: {still_reading}')
 
             # Update the progress bar
             self.current_file_progress_bar['value'] = percentage_read
