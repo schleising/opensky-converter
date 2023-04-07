@@ -434,6 +434,48 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../progress_dialog/" class="md-nav__link">
+        Progress Dialog
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reset_to_defaults_dialog/" class="md-nav__link">
+        Reset to Defaults Dialog
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../converter/" class="md-nav__link">
+        Converter
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -966,15 +1008,15 @@
 <a id="__codelineno-0-188" name="__codelineno-0-188"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">convert_button</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">DISABLED</span><span class="p">)</span>
 <a id="__codelineno-0-189" name="__codelineno-0-189"></a>
 <a id="__codelineno-0-190" name="__codelineno-0-190"></a>    <span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-0-191" name="__codelineno-0-191"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;To be implemented&quot;&quot;&quot;</span>
+<a id="__codelineno-0-191" name="__codelineno-0-191"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Converts the current file to the new file.&quot;&quot;&quot;</span>
 <a id="__codelineno-0-192" name="__codelineno-0-192"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapping_dialog</span><span class="o">.</span><span class="n">mapping</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 <a id="__codelineno-0-193" name="__codelineno-0-193"></a>            <span class="n">ProgressDialog</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_file_path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">new_file_path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_file_path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapping_dialog</span><span class="o">.</span><span class="n">mapping</span><span class="p">)</span>
 <a id="__codelineno-0-194" name="__codelineno-0-194"></a>        <span class="k">else</span><span class="p">:</span>
 <a id="__codelineno-0-195" name="__codelineno-0-195"></a>            <span class="n">messagebox</span><span class="o">.</span><span class="n">showerror</span><span class="p">(</span><span class="s1">&#39;Error&#39;</span><span class="p">,</span> <span class="s1">&#39;No mapping has been set.&#39;</span><span class="p">)</span>
 <a id="__codelineno-0-196" name="__codelineno-0-196"></a>
 <a id="__codelineno-0-197" name="__codelineno-0-197"></a>    <span class="k">def</span> <span class="nf">reset_to_defaults</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-0-198" name="__codelineno-0-198"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;To be implemented&quot;&quot;&quot;</span>
-<a id="__codelineno-0-199" name="__codelineno-0-199"></a>        <span class="k">pass</span>
+<a id="__codelineno-0-198" name="__codelineno-0-198"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Resets the current file and mapping to the defaults.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-199" name="__codelineno-0-199"></a>        <span class="n">ResetToDefaultsDialog</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
         </details>
 
@@ -1280,7 +1322,7 @@
 
   <div class="doc doc-contents ">
   
-      <p>To be implemented</p>
+      <p>Converts the current file to the new file.</p>
 
       <details class="quote">
         <summary>Source code in <code>UI/main_window.py</code></summary>
@@ -1290,7 +1332,7 @@
 <span class="normal"><a href="#__codelineno-0-193">193</a></span>
 <span class="normal"><a href="#__codelineno-0-194">194</a></span>
 <span class="normal"><a href="#__codelineno-0-195">195</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-190" name="__codelineno-0-190"></a><span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-0-191" name="__codelineno-0-191"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;To be implemented&quot;&quot;&quot;</span>
+<a id="__codelineno-0-191" name="__codelineno-0-191"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts the current file to the new file.&quot;&quot;&quot;</span>
 <a id="__codelineno-0-192" name="__codelineno-0-192"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapping_dialog</span><span class="o">.</span><span class="n">mapping</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 <a id="__codelineno-0-193" name="__codelineno-0-193"></a>        <span class="n">ProgressDialog</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_file_path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">new_file_path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_file_path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapping_dialog</span><span class="o">.</span><span class="n">mapping</span><span class="p">)</span>
 <a id="__codelineno-0-194" name="__codelineno-0-194"></a>    <span class="k">else</span><span class="p">:</span>
@@ -1371,15 +1413,15 @@
 
   <div class="doc doc-contents ">
   
-      <p>To be implemented</p>
+      <p>Resets the current file and mapping to the defaults.</p>
 
       <details class="quote">
         <summary>Source code in <code>UI/main_window.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-197">197</a></span>
 <span class="normal"><a href="#__codelineno-0-198">198</a></span>
 <span class="normal"><a href="#__codelineno-0-199">199</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-197" name="__codelineno-0-197"></a><span class="k">def</span> <span class="nf">reset_to_defaults</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-0-198" name="__codelineno-0-198"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;To be implemented&quot;&quot;&quot;</span>
-<a id="__codelineno-0-199" name="__codelineno-0-199"></a>    <span class="k">pass</span>
+<a id="__codelineno-0-198" name="__codelineno-0-198"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Resets the current file and mapping to the defaults.&quot;&quot;&quot;</span>
+<a id="__codelineno-0-199" name="__codelineno-0-199"></a>    <span class="n">ResetToDefaultsDialog</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
       </details>
   </div>
