@@ -101,14 +101,14 @@ class MappingDialog():
                 last_row = i // 2
 
             # Create the buttons
-            save_as_default_button = ttk.Button(frame, text='Save as Default', command=self.save_as_default)
-            save_as_default_button.grid(row=last_row + 1, column=3, sticky=tk.EW)
-
             accept_mapping_button = ttk.Button(frame, text='Accept Mapping', command=self.mapping_accepted)
-            accept_mapping_button.grid(row=last_row + 2, column=3, sticky=tk.EW)
+            accept_mapping_button.grid(row=last_row + 1, column=3, sticky=tk.EW)
+
+            save_as_default_button = ttk.Button(frame, text='Save as Default', command=self.save_as_default)
+            save_as_default_button.grid(row=last_row + 2, column=0, columnspan=2, sticky=tk.W)
 
             cancel_button = ttk.Button(frame, text='Cancel', command=self.mapping_rejected)
-            cancel_button.grid(row=last_row + 3, column=3, sticky=tk.EW)
+            cancel_button.grid(row=last_row + 2, column=3, sticky=tk.EW)
 
             # Apply padding to all children
             for child in frame.winfo_children():
