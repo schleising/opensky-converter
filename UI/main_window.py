@@ -7,6 +7,7 @@ Classes:
 """
 
 from pathlib import Path
+import logging
 
 import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
@@ -98,6 +99,9 @@ class MainWindow:
         self.root.bind('<<MappingAccepted>>', self.mapping_accepted)
         self.root.bind('<<MappingRejected>>', self.mapping_rejected)
 
+        # Log that the main window has been created
+        logging.debug('Main window created')
+
     def check_enable_buttons(self) -> None:
         """Checks if the buttons should be enabled or disabled."""
         # Check if the current file and new file have been selected
@@ -186,7 +190,7 @@ class MainWindow:
     def convert(self) -> None:
         """To be implemented"""
         if self.mapping_dialog.mapping is not None:
-            ProgressDialog(self.root)
+            ProgressDialog(self.root, self.current_file_path, self.new_file_path, self.output_file_path, self.mapping_dialog.mapping)
         else:
             messagebox.showerror('Error', 'No mapping has been set.')
 

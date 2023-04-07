@@ -11,6 +11,7 @@ import csv
 import json
 from pathlib import Path
 from typing import Dict, Union
+import logging
 
 import tkinter as tk
 from tkinter import ttk, messagebox
@@ -125,9 +126,15 @@ class MappingDialog():
             # Disable the parent window
             self.dialog.wait_window(self.dialog)
 
+            # Log the dialog being shown
+            logging.debug('Mapping dialog shown')
+
         else:
             # If there are no fieldnames, show an error message
             messagebox.showerror('Error', 'No fields found in new file')
+
+            # Log the error
+            logging.error(f'No fields found in new file {new_file_path.name}')
 
     def save_as_default(self):
         """Handles the save as default button being clicked.
