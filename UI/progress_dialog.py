@@ -22,7 +22,7 @@ class ProgressDialog:
         self.dialog.title('Converting...')
 
         # Remove normal window decorations
-        # _setup_dialog(self.dialog)
+        _setup_dialog(self.dialog)
 
         # Disable resizing the window
         self.dialog.resizable(False, False)
