@@ -27,6 +27,11 @@ class Converter:
         # Initialise an empty dictionary to store the current file's data
         self.current_file_data: Dict[str, Dict[str, str]] = {}
 
+        # Initialise the file pointers
+        self.current_file = None
+        self.new_file = None
+        self.output_file = None
+
     def initialise_current_file(self) -> None:
         # Get the number of lines in the original file
         with open(self.current_file_path, 'r') as current_file:
@@ -50,7 +55,7 @@ class Converter:
         # Run for 100 milliseconds
         while datetime.now() - start_time < timedelta(milliseconds=UI_REFRESH_TIME):
             # Check if the file is closed
-            if self.current_file.closed:
+            if self.current_file is None or self.current_file.closed:
                 break
 
             # Try to read the next line
@@ -70,14 +75,14 @@ class Converter:
                 break
 
             except csv.Error:
-                # Ignore this line
-                pass
+                # Log the error and ignore this line
+                logging.error('Error reading line %s of %s', self.lines_read, self.current_file_path)
 
             # Increment the number of lines read
             self.lines_read += 1
 
         # Return the number of lines read
-        return (self.lines_read / self.current_file_lines) * 100, not self.current_file.closed
+        return (self.lines_read / self.current_file_lines) * 100, True if self.current_file is None else not self.current_file.closed
     
     def initialise_new_file(self) -> None:
         # Get the number of lines in the new file
@@ -101,7 +106,7 @@ class Converter:
         # Run for 100 milliseconds
         while datetime.now() - start_time < timedelta(milliseconds=UI_REFRESH_TIME):
             # Check if the file is closed
-            if self.new_file.closed:
+            if self.new_file is None or self.new_file.closed:
                 break
 
             # Try to read the next line
@@ -149,7 +154,7 @@ class Converter:
             self.lines_read += 1
 
         # Return the number of lines read
-        return (self.lines_read / self.new_file_lines) * 100, not self.new_file.closed
+        return (self.lines_read / self.new_file_lines) * 100, True if self.new_file is None else not self.new_file.closed
 
     def initialise_output_file(self) -> bool:
         # Open the output file
@@ -182,7 +187,7 @@ class Converter:
         # Run for 100 milliseconds
         while datetime.now() - start_time < timedelta(milliseconds=UI_REFRESH_TIME):
             # Check if the file is closed
-            if self.output_file.closed:
+            if self.output_file is None or self.output_file.closed:
                 break
 
             # Try to read the next line
@@ -204,18 +209,18 @@ class Converter:
             self.lines_written += 1
 
         # Return the number of lines written
-        return (self.lines_written / len(self.current_file_data)) * 100, not self.output_file.closed
+        return (self.lines_written / len(self.current_file_data)) * 100, True if self.output_file is None else not self.output_file.closed
 
     def conversion_cancelled(self) -> None:
         """Called when the user cancels the conversion."""
         # Close the current file
-        if not self.current_file.closed:
+        if self.current_file is not None and not self.current_file.closed:
             self.current_file.close()
 
         # Close the new file
-        if not self.new_file.closed:
+        if self.new_file is not None and not self.new_file.closed:
             self.new_file.close()
 
         # Close the output file
-        if not self.output_file.closed:
+        if self.output_file is not None and not self.output_file.closed:
             self.output_file.close()
