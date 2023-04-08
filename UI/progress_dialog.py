@@ -100,14 +100,14 @@ class ProgressDialog:
             logging.debug(f'Current File: {percentage_read:3.2f}%, Still Reading: {still_reading}')
 
             # Update the progress bar
-            self.current_file_progress_bar['value'] = percentage_read
+            self.current_file_progress_bar.configure(value=percentage_read)
 
             if still_reading:
                 # Continue reading the current file
                 self.parent.after(1, self.read_current_file)
             else:
                 # Set the progress bar to 100%
-                self.current_file_progress_bar['value'] = 100
+                self.current_file_progress_bar.configure(value=100)
 
                 # Initialise the new file
                 self.converter.initialise_new_file()
@@ -126,14 +126,14 @@ class ProgressDialog:
             logging.debug(f'New File: {percentage_merged:3.2f}%, Still Merging: {still_merging}')
 
             # Update the progress bar
-            self.new_file_progress_bar['value'] = percentage_merged
+            self.new_file_progress_bar.configure(value=percentage_merged)
 
             if still_merging:
                 # Continue merging the new file
                 self.parent.after(1, self.merge_new_file)
             else:
                 # Set the progress bar to 100%
-                self.new_file_progress_bar['value'] = 100
+                self.new_file_progress_bar.configure(value=100)
 
                 # Initialise the output file
                 self.converter.initialise_output_file()
@@ -152,14 +152,14 @@ class ProgressDialog:
             logging.debug(f'Output File: {percentage_written:3.2f}%, Still Writing: {still_writing}')
 
             # Update the progress bar
-            self.output_file_progress_bar['value'] = percentage_written
+            self.output_file_progress_bar.configure(value=percentage_written)
 
             if still_writing:
                 # Continue writing the output file
                 self.parent.after(1, self.write_output_file)
             else:
                 # Set the progress bar to 100%
-                self.output_file_progress_bar['value'] = 100
+                self.output_file_progress_bar.configure(value=100)
 
                 # Change the cancel button to close
                 self.cancel_button.configure(text='Close')
