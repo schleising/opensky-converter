@@ -102,6 +102,9 @@ class ProgressDialog:
                 # Continue reading the current file
                 self.parent.after(1, self.read_current_file)
             else:
+                # Set the progress bar to 100%
+                self.current_file_progress_bar['value'] = 100
+
                 # Initialise the new file
                 self.converter.initialise_new_file()
 
@@ -124,6 +127,9 @@ class ProgressDialog:
                 # Continue merging the new file
                 self.parent.after(1, self.merge_new_file)
             else:
+                # Set the progress bar to 100%
+                self.new_file_progress_bar['value'] = 100
+
                 # Initialise the output file
                 self.converter.initialise_output_file()
 
@@ -146,7 +152,10 @@ class ProgressDialog:
                 # Continue writing the output file
                 self.parent.after(1, self.write_output_file)
             else:
-                # Destroy the dialog
+                # Set the progress bar to 100%
+                self.output_file_progress_bar['value'] = 100
+
+                # Change the cancel button to close
                 self.cancel_button.configure(text='Close')
 
     def cancel(self) -> None:
