@@ -17,7 +17,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from tkinter.simpledialog import _setup_dialog # type: ignore
 
-from .constants import ORIGINAL_IRCA_MAPPING, DEFAULT_MAPPING_PATH
+from .constants import ORIGINAL_IRCA_MAPPING, DEFAULT_MAPPING_PATH, NO_MAPPING_STRING
 
 class MappingDialog():
     def __init__(self, parent: tk.Tk):
@@ -65,6 +65,9 @@ class MappingDialog():
 
             # Get the fieldnames as a list
             fieldnames = list(self.fieldnames)
+
+            # Add Do not Map to the start of the list
+            fieldnames.insert(0, NO_MAPPING_STRING)
 
             # Iniialise the last row counter
             last_row = 0
