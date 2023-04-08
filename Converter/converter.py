@@ -1,4 +1,5 @@
 import csv
+import logging
 from pathlib import Path
 from typing import Dict, Tuple
 from datetime import datetime, timedelta
@@ -58,7 +59,7 @@ class Converter:
                 row = next(self.current_file_reader)
 
                 # Add the row to the dictionary
-                if row[MODE_S_ADDRESS_KEY] in row:
+                if MODE_S_ADDRESS_KEY in row:
                     self.current_file_data[row[MODE_S_ADDRESS_KEY]] = row
 
             except StopIteration:
@@ -108,25 +109,30 @@ class Converter:
                 # Get the next row
                 new_row = next(self.new_file_reader)
 
+                # Ensure the Mode S ID is in uppercase
+                new_row[self.mapping[MODE_S_ADDRESS_KEY]] = new_row[self.mapping[MODE_S_ADDRESS_KEY]].upper()
+
                 # Get the Mode S ID
                 mode_s_id = new_row[self.mapping[MODE_S_ADDRESS_KEY]]
 
-                # Check if the row is in the current file
-                if mode_s_id not in self.current_file_data:
-                    # Add the row to the current file
-                    self.current_file_data[mode_s_id] = {}
+                # Ensure there is actually a value in the Mode S ID
+                if mode_s_id != '':
+                    # Check if the row is in the current file
+                    if mode_s_id not in self.current_file_data:
+                        # Add the row to the current file
+                        self.current_file_data[mode_s_id] = {}
 
-                # Merge the new row into the current row
-                for irca_field, new_field in self.mapping.items():
-                    # Check if the field is in the current row
-                    if irca_field not in self.current_file_data[mode_s_id]:
-                        # Add the field to the current row
-                        self.current_file_data[mode_s_id][irca_field] = ''
+                    # Merge the new row into the current row
+                    for irca_field, new_field in self.mapping.items():
+                        # Check if the field is in the current row
+                        if irca_field not in self.current_file_data[mode_s_id]:
+                            # Add the field to the current row
+                            self.current_file_data[mode_s_id][irca_field] = ''
 
-                    # Check if data from the new row should overwrite the data in the current row
-                    if new_field != NO_MAPPING_STRING and new_row[new_field] != '':
-                        # Overwrite the data in the current row
-                        self.current_file_data[mode_s_id][irca_field] = new_row[new_field]
+                        # Check if data from the new row should overwrite the data in the current row
+                        if new_field != NO_MAPPING_STRING and new_row[new_field] != '':
+                            # Overwrite the data in the current row
+                            self.current_file_data[mode_s_id][irca_field] = new_row[new_field]
 
             except StopIteration:
                 # Close the new file
@@ -136,8 +142,8 @@ class Converter:
                 break
 
             except csv.Error:
-                # Ignore this line
-                pass
+                # Ignore this line, log the error
+                logging.error(f'Error reading line {self.lines_read} of {self.new_file_path}')
 
             # Increment the number of lines read
             self.lines_read += 1
