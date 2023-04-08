@@ -6,6 +6,7 @@ Classes:
     MainWindow: The main window for the application.
 """
 
+import csv
 from pathlib import Path
 import logging
 
@@ -14,6 +15,8 @@ from tkinter import ttk, filedialog, messagebox
 from tkinter.simpledialog import _setup_dialog # type: ignore
 
 from . import MappingDialog, ProgressDialog, ResetToDefaultsDialog
+
+from .constants import ORIGINAL_IRCA_MAPPING
 
 class MainWindow:
     def __init__(self, root: tk.Tk) -> None:
@@ -123,6 +126,12 @@ class MainWindow:
             else:
                 # Disable the output file button
                 self.output_file_button.configure(state=tk.DISABLED)
+        else:
+            # Disable the output file button
+            self.output_file_button.configure(state=tk.DISABLED)
+
+            # Disable the set mapping button
+            self.set_mappping_button.configure(state=tk.DISABLED)
 
     def select_current_file(self) -> None:
         """Selects the current file."""
@@ -131,6 +140,14 @@ class MainWindow:
 
         # Check if a filename was selected
         if filename:
+            # Check the field names in the current file match the field names in the default mapping
+            if not self.check_field_names(filename):
+                # Display a message box
+                messagebox.showerror('Error', 'The field names in the current file do not match the field names in the default mapping.\nPlease select a different file.')
+
+                # Clear the filename
+                filename = ''
+
             # Set the current file path
             self.current_file_path = Path(filename)
 
@@ -139,6 +156,36 @@ class MainWindow:
 
             # Check if the buttons should be enabled or disabled
             self.check_enable_buttons()
+
+    def check_field_names(self, filename: str) -> bool:
+        """Checks the field names in the current file match the field names in the default mapping.
+
+        Args:
+            filename: The filename of the current file.
+
+        Returns:
+            True if the field names match, False otherwise.
+        """
+        # Open the current file
+        with open(filename, 'r', encoding='utf-8', newline='') as current_file:
+            # Create a dictionary reader
+            reader = csv.DictReader(current_file, delimiter=';')
+
+            # Get the field names
+            field_names = reader.fieldnames
+
+            if field_names is None:
+                # Return False
+                return False
+
+            for default_field_name in ORIGINAL_IRCA_MAPPING.keys():
+                # Check if the default field name is not in the field names
+                if default_field_name not in field_names:
+                    # Return False
+                    return False
+                
+        # Return True
+        return True
 
     def select_new_file(self) -> None:
         """Selects the new file."""
