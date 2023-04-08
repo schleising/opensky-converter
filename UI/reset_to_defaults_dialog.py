@@ -85,13 +85,13 @@ class ResetToDefaultsDialog:
         """Resets the settings."""
         # Reset the current file
         if self.current_file_checkbox_var.get():
-            # self.parent.reset_current_file()
-            logging.debug('Resetting current file')
+            # Log that the current file has been reset
+            logging.info('Resetting current file')
 
         # Reset the mapping
         if self.mapping_checkbox_var.get():
-            # self.parent.reset_mapping()
-            logging.debug('Resetting mapping')
+            # Log that the mapping has been reset
+            logging.info('Resetting mapping')
 
             # Create the defaults directory if it doesn't exist
             DEFAULT_MAPPING_PATH.parent.mkdir(parents=True, exist_ok=True)

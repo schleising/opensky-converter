@@ -143,7 +143,10 @@ class MainWindow:
             # Check the field names in the current file match the field names in the default mapping
             if not self.check_field_names(filename):
                 # Display a message box
-                messagebox.showerror('Error', 'The field names in the current file do not match the field names in the default mapping.\nPlease select a different file.')
+                messagebox.showerror('Error', 'The field names in the current file do not match the field names in the default mapping.\n\nPlease select a different file.')
+
+                # Log that the field names in the current file do not match the field names in the default mapping
+                logging.error(f'The field names in the current file {filename} do not match the field names in the default mapping')
 
                 # Clear the filename
                 filename = ''
@@ -239,7 +242,11 @@ class MainWindow:
         if self.mapping_dialog.mapping is not None:
             ProgressDialog(self.root, self.current_file_path, self.new_file_path, self.output_file_path, self.mapping_dialog.mapping)
         else:
+            # Display a message box
             messagebox.showerror('Error', 'No mapping has been set.')
+
+            # Log that no mapping has been set
+            logging.error('No mapping has been set')
 
     def reset_to_defaults(self) -> None:
         """Resets the current file and mapping to the defaults."""

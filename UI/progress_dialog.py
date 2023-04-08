@@ -86,6 +86,9 @@ class ProgressDialog:
         # Start reading the current file
         self.read_current_file()
 
+        # Log the the progress dialog has been created
+        logging.debug('Progress Dialog Created')
+
     def read_current_file(self) -> None:
         """Reads the current file."""
         # Check if the conversion has been cancelled
@@ -93,6 +96,7 @@ class ProgressDialog:
             # Read the current file
             percentage_read, still_reading = self.converter.read_current_file()
 
+            # Log the progress
             logging.debug(f'Current File: {percentage_read:3.2f}%, Still Reading: {still_reading}')
 
             # Update the progress bar
@@ -118,6 +122,7 @@ class ProgressDialog:
             # Merge the new file
             percentage_merged, still_merging = self.converter.merge_new_file()
 
+            # Log the progress
             logging.debug(f'New File: {percentage_merged:3.2f}%, Still Merging: {still_merging}')
 
             # Update the progress bar
@@ -143,6 +148,7 @@ class ProgressDialog:
             # Write the output file
             percentage_written, still_writing = self.converter.write_output_file()
 
+            # Log the progress
             logging.debug(f'Output File: {percentage_written:3.2f}%, Still Writing: {still_writing}')
 
             # Update the progress bar
