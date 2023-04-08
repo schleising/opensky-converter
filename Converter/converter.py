@@ -3,16 +3,16 @@ from pathlib import Path
 from typing import Dict, Tuple
 from datetime import datetime, timedelta
 
-REFRESH_TIME = 100 # The time in milliseconds to wait before refreshing the progress bars
+from UI.constants import MODE_S_ADDRESS_KEY, UI_REFRESH_TIME, NO_MAPPING_STRING
 
 class Converter:
     def __init__(self, current_file_path: Path, new_file_path: Path, output_file_path: Path, mapping: Dict[str, str]) -> None:
         """Merges the New File into the Current File and outputs the result to the Output File.
 
         Args:
-            current_filename (Path): The existing aircraft database file.
-            new_filename (Path): The file containing new data to be merged into the existing database.
-            output_filename (Path): The file to output the merged data to.
+            current_file_path (Path): The existing aircraft database file.
+            new_file_path (Path): The file containing new data to be merged into the existing database.
+            output_file_path (Path): The file to output the merged data to.
             mapping (Dict[str, str]): The mapping of the new file's fieldnames to the current file's fieldnames.
         """
         # Store the file paths
@@ -35,7 +35,7 @@ class Converter:
         self.current_file = open(self.current_file_path, 'r', encoding='utf-8', newline='')
 
         # Create a reader for the current file
-        self.current_file_reader = csv.DictReader(self.current_file)
+        self.current_file_reader = csv.DictReader(self.current_file, delimiter=';')
 
         # Initialise the number of lines read to 0
         self.lines_read = 0
@@ -47,7 +47,7 @@ class Converter:
         start_time = datetime.now()
 
         # Run for 100 milliseconds
-        while datetime.now() - start_time < timedelta(milliseconds=REFRESH_TIME):
+        while datetime.now() - start_time < timedelta(milliseconds=UI_REFRESH_TIME):
             # Check if the file is closed
             if self.current_file.closed:
                 break
@@ -58,8 +58,8 @@ class Converter:
                 row = next(self.current_file_reader)
 
                 # Add the row to the dictionary
-                if row['icao24'] in row:
-                    self.current_file_data[row['icao24']] = row
+                if row[MODE_S_ADDRESS_KEY] in row:
+                    self.current_file_data[row[MODE_S_ADDRESS_KEY]] = row
 
             except StopIteration:
                 # Close the current file
@@ -98,7 +98,7 @@ class Converter:
         start_time = datetime.now()
 
         # Run for 100 milliseconds
-        while datetime.now() - start_time < timedelta(milliseconds=REFRESH_TIME):
+        while datetime.now() - start_time < timedelta(milliseconds=UI_REFRESH_TIME):
             # Check if the file is closed
             if self.new_file.closed:
                 break
@@ -109,7 +109,7 @@ class Converter:
                 new_row = next(self.new_file_reader)
 
                 # Get the Mode S ID
-                mode_s_id = new_row['icao24']
+                mode_s_id = new_row[self.mapping[MODE_S_ADDRESS_KEY]]
 
                 # Check if the row is in the current file
                 if mode_s_id not in self.current_file_data:
@@ -123,8 +123,8 @@ class Converter:
                         # Add the field to the current row
                         self.current_file_data[mode_s_id][irca_field] = ''
 
-                    # Chekc if data from the new row should overwrite the data in the current row
-                    if new_field != 'None' and new_row[new_field] != '':
+                    # Check if data from the new row should overwrite the data in the current row
+                    if new_field != NO_MAPPING_STRING and new_row[new_field] != '':
                         # Overwrite the data in the current row
                         self.current_file_data[mode_s_id][irca_field] = new_row[new_field]
 
@@ -174,7 +174,7 @@ class Converter:
         start_time = datetime.now()
 
         # Run for 100 milliseconds
-        while datetime.now() - start_time < timedelta(milliseconds=REFRESH_TIME):
+        while datetime.now() - start_time < timedelta(milliseconds=UI_REFRESH_TIME):
             # Check if the file is closed
             if self.output_file.closed:
                 break
