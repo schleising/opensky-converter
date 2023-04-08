@@ -19,8 +19,8 @@ from tkinter.simpledialog import _setup_dialog # type: ignore
 
 from .constants import ORIGINAL_IRCA_MAPPING, DEFAULT_MAPPING_PATH, NO_MAPPING_STRING, MODE_S_ADDRESS_KEY
 
-class MappingDialog():
-    def __init__(self, parent: tk.Tk):
+class MappingDialog:
+    def __init__(self, parent: tk.Tk) -> None:
         """Creates the mapping dialog.
 
         Args:
@@ -136,7 +136,7 @@ class MappingDialog():
             # Log the error
             logging.error(f'No fields found in new file {new_file_path.name}')
 
-    def save_as_default(self):
+    def save_as_default(self) -> None:
         """Handles the save as default button being clicked.
         """
         # Check if the mapping is valid
@@ -154,7 +154,7 @@ class MappingDialog():
             # Show a success message
             messagebox.showinfo('Success', 'Default mapping saved')
 
-    def mapping_accepted(self):
+    def mapping_accepted(self) -> None:
         """Handles the mapping being accepted.
         """
         # Check if the mapping is valid
@@ -168,7 +168,7 @@ class MappingDialog():
             # Close the dialog
             self.close_dialog()
 
-    def check_mode_s_mapped(self):
+    def check_mode_s_mapped(self) -> bool:
         """Checks if the mapping is valid.
 
         Returns:
@@ -188,7 +188,7 @@ class MappingDialog():
         # Return True
         return True
 
-    def mapping_rejected(self):
+    def mapping_rejected(self) -> None:
         """Handles the mapping being rejected.
         """
         # Generate the mapping rejected event
@@ -197,7 +197,7 @@ class MappingDialog():
         # Close the dialog
         self.close_dialog()
 
-    def close_dialog(self):
+    def close_dialog(self) -> None:
         """Closes the dialog.
         """
         # Release the parent window
