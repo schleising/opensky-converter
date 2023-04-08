@@ -30,3 +30,6 @@ nav:
   - Reference:
     - Main Window: reference/main_window.md
     - Mapping Dialog: reference/mapping_dialog.md
+    - Progress Dialog: reference/progress_dialog.md
+    - Reset to Defaults Dialog: reference/reset_to_defaults_dialog.md
+    - Converter: reference/converter.md
