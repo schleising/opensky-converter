@@ -739,13 +739,13 @@
 <a id="__codelineno-0-85" name="__codelineno-0-85"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Resets the settings.&quot;&quot;&quot;</span>
 <a id="__codelineno-0-86" name="__codelineno-0-86"></a>        <span class="c1"># Reset the current file</span>
 <a id="__codelineno-0-87" name="__codelineno-0-87"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_file_checkbox_var</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
-<a id="__codelineno-0-88" name="__codelineno-0-88"></a>            <span class="c1"># self.parent.reset_current_file()</span>
-<a id="__codelineno-0-89" name="__codelineno-0-89"></a>            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Resetting current file&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-88" name="__codelineno-0-88"></a>            <span class="c1"># Log that the current file has been reset</span>
+<a id="__codelineno-0-89" name="__codelineno-0-89"></a>            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Resetting current file&#39;</span><span class="p">)</span>
 <a id="__codelineno-0-90" name="__codelineno-0-90"></a>
 <a id="__codelineno-0-91" name="__codelineno-0-91"></a>        <span class="c1"># Reset the mapping</span>
 <a id="__codelineno-0-92" name="__codelineno-0-92"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapping_checkbox_var</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
-<a id="__codelineno-0-93" name="__codelineno-0-93"></a>            <span class="c1"># self.parent.reset_mapping()</span>
-<a id="__codelineno-0-94" name="__codelineno-0-94"></a>            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Resetting mapping&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-93" name="__codelineno-0-93"></a>            <span class="c1"># Log that the mapping has been reset</span>
+<a id="__codelineno-0-94" name="__codelineno-0-94"></a>            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Resetting mapping&#39;</span><span class="p">)</span>
 <a id="__codelineno-0-95" name="__codelineno-0-95"></a>
 <a id="__codelineno-0-96" name="__codelineno-0-96"></a>            <span class="c1"># Create the defaults directory if it doesn&#39;t exist</span>
 <a id="__codelineno-0-97" name="__codelineno-0-97"></a>            <span class="n">DEFAULT_MAPPING_PATH</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1022,13 +1022,13 @@
 <a id="__codelineno-0-85" name="__codelineno-0-85"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Resets the settings.&quot;&quot;&quot;</span>
 <a id="__codelineno-0-86" name="__codelineno-0-86"></a>    <span class="c1"># Reset the current file</span>
 <a id="__codelineno-0-87" name="__codelineno-0-87"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_file_checkbox_var</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
-<a id="__codelineno-0-88" name="__codelineno-0-88"></a>        <span class="c1"># self.parent.reset_current_file()</span>
-<a id="__codelineno-0-89" name="__codelineno-0-89"></a>        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Resetting current file&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-88" name="__codelineno-0-88"></a>        <span class="c1"># Log that the current file has been reset</span>
+<a id="__codelineno-0-89" name="__codelineno-0-89"></a>        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Resetting current file&#39;</span><span class="p">)</span>
 <a id="__codelineno-0-90" name="__codelineno-0-90"></a>
 <a id="__codelineno-0-91" name="__codelineno-0-91"></a>    <span class="c1"># Reset the mapping</span>
 <a id="__codelineno-0-92" name="__codelineno-0-92"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapping_checkbox_var</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
-<a id="__codelineno-0-93" name="__codelineno-0-93"></a>        <span class="c1"># self.parent.reset_mapping()</span>
-<a id="__codelineno-0-94" name="__codelineno-0-94"></a>        <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Resetting mapping&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-93" name="__codelineno-0-93"></a>        <span class="c1"># Log that the mapping has been reset</span>
+<a id="__codelineno-0-94" name="__codelineno-0-94"></a>        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Resetting mapping&#39;</span><span class="p">)</span>
 <a id="__codelineno-0-95" name="__codelineno-0-95"></a>
 <a id="__codelineno-0-96" name="__codelineno-0-96"></a>        <span class="c1"># Create the defaults directory if it doesn&#39;t exist</span>
 <a id="__codelineno-0-97" name="__codelineno-0-97"></a>        <span class="n">DEFAULT_MAPPING_PATH</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
