@@ -17,7 +17,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from tkinter.simpledialog import _setup_dialog # type: ignore
 
-from .constants import ORIGINAL_IRCA_MAPPING, DEFAULT_MAPPING_PATH, NO_MAPPING_STRING
+from .constants import ORIGINAL_IRCA_MAPPING, DEFAULT_MAPPING_PATH, NO_MAPPING_STRING, MODE_S_ADDRESS_KEY
 
 class MappingDialog():
     def __init__(self, parent: tk.Tk):
@@ -139,30 +139,54 @@ class MappingDialog():
     def save_as_default(self):
         """Handles the save as default button being clicked.
         """
-        # Get the new mapping
-        new_mapping = {field: mapping.get() for field, mapping in self.combobox_dict.items()}
+        # Check if the mapping is valid
+        if self.check_mode_s_mapped():
+            # Get the new mapping
+            new_mapping = {field: mapping.get() for field, mapping in self.combobox_dict.items()}
 
-        # Create the defaults directory if it doesn't exist
-        DEFAULT_MAPPING_PATH.parent.mkdir(parents=True, exist_ok=True)
+            # Create the defaults directory if it doesn't exist
+            DEFAULT_MAPPING_PATH.parent.mkdir(parents=True, exist_ok=True)
 
-        # Save the new mapping
-        with DEFAULT_MAPPING_PATH.open('w', encoding='utf8') as default_mapping_file:
-            json.dump(new_mapping, default_mapping_file, indent=2)
+            # Save the new mapping
+            with DEFAULT_MAPPING_PATH.open('w', encoding='utf8') as default_mapping_file:
+                json.dump(new_mapping, default_mapping_file, indent=2)
 
-        # Show a success message
-        messagebox.showinfo('Success', 'Default mapping saved')
+            # Show a success message
+            messagebox.showinfo('Success', 'Default mapping saved')
 
     def mapping_accepted(self):
         """Handles the mapping being accepted.
         """
-        # Get the new mapping
-        self.mapping = {field: mapping.get() for field, mapping in self.combobox_dict.items()}
+        # Check if the mapping is valid
+        if self.check_mode_s_mapped():
+            # Get the new mapping
+            self.mapping = {field: mapping.get() for field, mapping in self.combobox_dict.items()}
 
-        # Generate the mapping accepted event
-        self.parent.event_generate('<<MappingAccepted>>', when='tail')
+            # Generate the mapping accepted event
+            self.parent.event_generate('<<MappingAccepted>>', when='tail')
 
-        # Close the dialog
-        self.close_dialog()
+            # Close the dialog
+            self.close_dialog()
+
+    def check_mode_s_mapped(self):
+        """Checks if the mapping is valid.
+
+        Returns:
+            bool: True if the mapping is valid, False otherwise.
+        """
+        # Check if the Mode S field is mapped
+        if self.combobox_dict[MODE_S_ADDRESS_KEY].get() == NO_MAPPING_STRING:
+            # If it isn't, show an error message
+            messagebox.showerror('Error', 'ModeSCode field must be mapped')
+
+            # Log the error
+            logging.error('ModeSCode field must be mapped')
+
+            # Return False
+            return False
+
+        # Return True
+        return True
 
     def mapping_rejected(self):
         """Handles the mapping being rejected.
