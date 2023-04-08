@@ -129,3 +129,4 @@ dmypy.json
 database
 .DS_Store
 opensky-converter-log.txt
+site/sitemap.xml.gz
