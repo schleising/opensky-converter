@@ -117,6 +117,9 @@ venv.bak/
 # Rope project settings
 .ropeproject
 
+# mkdocs documentation
+/site
+
 # mypy
 .mypy_cache/
 .dmypy.json
@@ -128,5 +131,3 @@ dmypy.json
 # Local ignores
 database
 .DS_Store
-opensky-converter-log.txt
-site/sitemap.xml.gz
