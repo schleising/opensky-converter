@@ -42,6 +42,7 @@ Click image to see flowchart
 [![Reset to Defaults](Design/Reset%20to%20Default%20Dialog.png)](reset_to_defaults.md)
 
 Selecting Reset to Defaults will open the Reset to Defaults Dialog
+
 - Choose whether to reset the Aircraft DB File, the Default Mapping, or both
     - Selecting Reset will close the dialog and reset the selected items
     - Selecting Cancel will close the dialog without resetting anything
