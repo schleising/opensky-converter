@@ -182,9 +182,15 @@ class MainWindow:
                         # Enable the set mapping button
                         self.set_mappping_button.configure(state=tk.NORMAL)
                     else:
+                        # Show an error message
+                        messagebox.showerror('Error', 'The Output File cannot be the same as the Current File or New File\n\nPlease select a different Output Filename')
+
                         # Disable the set mapping button
                         self.set_mappping_button.configure(state=tk.DISABLED)
             else:
+                # Show an error message
+                messagebox.showerror('Error', 'The Current File and New File cannot be the same\n\nPlease select different files')
+
                 # Disable the output file button
                 self.output_file_button.configure(state=tk.DISABLED)
         else:
