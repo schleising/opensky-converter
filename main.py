@@ -15,12 +15,6 @@ if __name__ == '__main__':
     # Create the root window
     root = tk.Tk()
 
-    # Create the icon
-    photoimage = tk.PhotoImage(file='resources/icon_512x512.png')
-
-    # Set the icon
-    root.wm_iconphoto(True, photoimage)
-
     # Create the main window
     MainWindow(root)
 

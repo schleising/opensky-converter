@@ -2,6 +2,13 @@
 
 from pathlib import Path
 
+APPLICATION_NAME = 'Aircraft DB Converter'
+VERSION = '0.0.1'
+
+X11_SYSTEM = 'x11'
+WINDOWS_SYSTEM = 'win32'
+MACOS_SYSTEM = 'aqua'
+
 UI_REFRESH_TIME = 100 # The time in milliseconds to wait before refreshing the progress bars
 
 NO_MAPPING_STRING = 'Do not Map'

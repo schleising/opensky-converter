@@ -9,6 +9,7 @@ Classes:
 import csv
 from pathlib import Path
 import logging
+import webbrowser
 
 import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
@@ -16,7 +17,7 @@ from tkinter.simpledialog import _setup_dialog # type: ignore
 
 from . import MappingDialog, ProgressDialog, ResetToDefaultsDialog
 
-from .constants import ORIGINAL_IRCA_MAPPING
+from . import constants
 
 class MainWindow:
     def __init__(self, root: tk.Tk) -> None:
@@ -25,10 +26,20 @@ class MainWindow:
         Args:
             root (tk.Tk): The root window.
         """
+        # Store the root window
         self.root = root
 
+        # Create the icon
+        photoimage = tk.PhotoImage(file='resources/icon_512x512.png')
+
+        # Set the icon
+        self.root.wm_iconphoto(True, photoimage)
+
         # Set the window title
-        self.root.title('Aircraft DB Converter')
+        self.root.title(constants.APPLICATION_NAME)
+
+        # Set up the menu bar
+        self.setup_menu_bar()
 
         # Remove normal window decorations
         _setup_dialog(self.root)
@@ -104,6 +115,56 @@ class MainWindow:
 
         # Log that the main window has been created
         logging.debug('Main window created')
+
+    def setup_menu_bar(self) -> None:
+        """Sets up the menu bar."""
+        # Create the menu bar
+        self.menu_bar = tk.Menu(self.root)
+
+        # The menus need to be set up differently on macOS, so first create the macOS menu
+        if self.root.tk.call('tk', 'windowingsystem') == constants.MACOS_SYSTEM:
+            # Create the Apple menu, this is actually the menu named for the application on macOS
+            self.apple_menu = tk.Menu(self.menu_bar, name='apple', tearoff=0)
+            self.apple_menu.add_command(label='About', command=self.show_about_dialog)
+            self.apple_menu.add_command(label='Documentation', command=self.open_documentation)
+
+            # Add the menu to the menu bar
+            self.menu_bar.add_cascade(menu=self.apple_menu)
+        else:
+            # Create the file menu
+            self.file_menu = tk.Menu(self.menu_bar, tearoff=0)
+            self.file_menu.add_command(label='Quit', command=self.root.destroy)
+
+            # Create the help menu
+            self.help_menu = tk.Menu(self.menu_bar, tearoff=0)
+            self.help_menu.add_command(label='About', command=self.show_about_dialog)
+            self.help_menu.add_command(label='Documentation', command=self.open_documentation)
+
+            # Add the menus to the menu bar
+            self.menu_bar.add_cascade(label='File', menu=self.file_menu)
+            self.menu_bar.add_cascade(label='Help', menu=self.help_menu)
+
+        # Set the menu bar
+        self.root.configure(menu=self.menu_bar)
+
+    def show_about_dialog(self) -> None:
+        """Shows the about dialog."""
+        # Open a simple dialog box with the about information
+        messagebox.showinfo('About', f'{constants.APPLICATION_NAME}\n\nVersion {constants.VERSION}')
+
+    def open_documentation(self) -> None:
+        """Opens the documentation."""
+        # Log that the documentation is being opened
+        logging.debug('Opening documentation')
+
+        # Get the path to the documentation
+        docs_path = Path('site/index.html').absolute().as_posix()
+
+        # Log the documentation path
+        logging.debug(f'Documentation path: {docs_path}')
+
+        # Open the documentation
+        webbrowser.open(f'file://{docs_path}', new=2, autoraise=True)
 
     def check_enable_buttons(self) -> None:
         """Checks if the buttons should be enabled or disabled."""
@@ -181,7 +242,7 @@ class MainWindow:
                 # Return False
                 return False
 
-            for default_field_name in ORIGINAL_IRCA_MAPPING.keys():
+            for default_field_name in constants.ORIGINAL_IRCA_MAPPING.keys():
                 # Check if the default field name is not in the field names
                 if default_field_name not in field_names:
                     # Return False
