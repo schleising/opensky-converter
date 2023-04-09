@@ -15,7 +15,7 @@
         <link rel="next" href="progress_dialog.html">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.4">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.6">
     
     
       
@@ -23,7 +23,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.240905d7.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ded33207.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.a0c5b2b5.min.css">
@@ -845,17 +845,17 @@
 <a id="__codelineno-0-67" name="__codelineno-0-67"></a>            <span class="n">fieldnames</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fieldnames</span><span class="p">)</span>
 <a id="__codelineno-0-68" name="__codelineno-0-68"></a>
 <a id="__codelineno-0-69" name="__codelineno-0-69"></a>            <span class="c1"># Add Do not Map to the start of the list</span>
-<a id="__codelineno-0-70" name="__codelineno-0-70"></a>            <span class="n">fieldnames</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">NO_MAPPING_STRING</span><span class="p">)</span>
+<a id="__codelineno-0-70" name="__codelineno-0-70"></a>            <span class="n">fieldnames</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">NO_MAPPING_STRING</span><span class="p">)</span>
 <a id="__codelineno-0-71" name="__codelineno-0-71"></a>
 <a id="__codelineno-0-72" name="__codelineno-0-72"></a>            <span class="c1"># Iniialise the last row counter</span>
 <a id="__codelineno-0-73" name="__codelineno-0-73"></a>            <span class="n">last_row</span> <span class="o">=</span> <span class="mi">0</span>
 <a id="__codelineno-0-74" name="__codelineno-0-74"></a>
 <a id="__codelineno-0-75" name="__codelineno-0-75"></a>            <span class="c1"># Read the default mapping file, using the original mapping if the file doesn&#39;t exist</span>
-<a id="__codelineno-0-76" name="__codelineno-0-76"></a>            <span class="k">if</span> <span class="n">DEFAULT_MAPPING_PATH</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
-<a id="__codelineno-0-77" name="__codelineno-0-77"></a>                <span class="k">with</span> <span class="n">DEFAULT_MAPPING_PATH</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">default_mapping_file</span><span class="p">:</span>
+<a id="__codelineno-0-76" name="__codelineno-0-76"></a>            <span class="k">if</span> <span class="n">constants</span><span class="o">.</span><span class="n">DEFAULT_MAPPING_PATH</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+<a id="__codelineno-0-77" name="__codelineno-0-77"></a>                <span class="k">with</span> <span class="n">constants</span><span class="o">.</span><span class="n">DEFAULT_MAPPING_PATH</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">default_mapping_file</span><span class="p">:</span>
 <a id="__codelineno-0-78" name="__codelineno-0-78"></a>                    <span class="bp">self</span><span class="o">.</span><span class="n">irca_mapping</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">default_mapping_file</span><span class="p">)</span>
 <a id="__codelineno-0-79" name="__codelineno-0-79"></a>            <span class="k">else</span><span class="p">:</span>
-<a id="__codelineno-0-80" name="__codelineno-0-80"></a>                <span class="bp">self</span><span class="o">.</span><span class="n">irca_mapping</span> <span class="o">=</span> <span class="n">ORIGINAL_IRCA_MAPPING</span>
+<a id="__codelineno-0-80" name="__codelineno-0-80"></a>                <span class="bp">self</span><span class="o">.</span><span class="n">irca_mapping</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">ORIGINAL_IRCA_MAPPING</span>
 <a id="__codelineno-0-81" name="__codelineno-0-81"></a>
 <a id="__codelineno-0-82" name="__codelineno-0-82"></a>            <span class="c1"># Create the labels and comboboxes</span>
 <a id="__codelineno-0-83" name="__codelineno-0-83"></a>            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">mapping</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">irca_mapping</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
@@ -923,10 +923,10 @@
 <a id="__codelineno-0-145" name="__codelineno-0-145"></a>            <span class="n">new_mapping</span> <span class="o">=</span> <span class="p">{</span><span class="n">field</span><span class="p">:</span> <span class="n">mapping</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="k">for</span> <span class="n">field</span><span class="p">,</span> <span class="n">mapping</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">combobox_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
 <a id="__codelineno-0-146" name="__codelineno-0-146"></a>
 <a id="__codelineno-0-147" name="__codelineno-0-147"></a>            <span class="c1"># Create the defaults directory if it doesn&#39;t exist</span>
-<a id="__codelineno-0-148" name="__codelineno-0-148"></a>            <span class="n">DEFAULT_MAPPING_PATH</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-0-148" name="__codelineno-0-148"></a>            <span class="n">constants</span><span class="o">.</span><span class="n">DEFAULT_MAPPING_PATH</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <a id="__codelineno-0-149" name="__codelineno-0-149"></a>
 <a id="__codelineno-0-150" name="__codelineno-0-150"></a>            <span class="c1"># Save the new mapping</span>
-<a id="__codelineno-0-151" name="__codelineno-0-151"></a>            <span class="k">with</span> <span class="n">DEFAULT_MAPPING_PATH</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">default_mapping_file</span><span class="p">:</span>
+<a id="__codelineno-0-151" name="__codelineno-0-151"></a>            <span class="k">with</span> <span class="n">constants</span><span class="o">.</span><span class="n">DEFAULT_MAPPING_PATH</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">default_mapping_file</span><span class="p">:</span>
 <a id="__codelineno-0-152" name="__codelineno-0-152"></a>                <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">new_mapping</span><span class="p">,</span> <span class="n">default_mapping_file</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <a id="__codelineno-0-153" name="__codelineno-0-153"></a>
 <a id="__codelineno-0-154" name="__codelineno-0-154"></a>            <span class="c1"># Show a success message</span>
@@ -953,7 +953,7 @@
 <a id="__codelineno-0-175" name="__codelineno-0-175"></a><span class="sd">            bool: True if the mapping is valid, False otherwise.</span>
 <a id="__codelineno-0-176" name="__codelineno-0-176"></a><span class="sd">        &quot;&quot;&quot;</span>
 <a id="__codelineno-0-177" name="__codelineno-0-177"></a>        <span class="c1"># Check if the Mode S field is mapped</span>
-<a id="__codelineno-0-178" name="__codelineno-0-178"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">combobox_dict</span><span class="p">[</span><span class="n">MODE_S_ADDRESS_KEY</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">==</span> <span class="n">NO_MAPPING_STRING</span><span class="p">:</span>
+<a id="__codelineno-0-178" name="__codelineno-0-178"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">combobox_dict</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">MODE_S_ADDRESS_KEY</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">NO_MAPPING_STRING</span><span class="p">:</span>
 <a id="__codelineno-0-179" name="__codelineno-0-179"></a>            <span class="c1"># If it isn&#39;t, show an error message</span>
 <a id="__codelineno-0-180" name="__codelineno-0-180"></a>            <span class="n">messagebox</span><span class="o">.</span><span class="n">showerror</span><span class="p">(</span><span class="s1">&#39;Error&#39;</span><span class="p">,</span> <span class="s1">&#39;ModeSCode field must be mapped&#39;</span><span class="p">)</span>
 <a id="__codelineno-0-181" name="__codelineno-0-181"></a>
@@ -1124,7 +1124,7 @@
 <a id="__codelineno-0-175" name="__codelineno-0-175"></a><span class="sd">        bool: True if the mapping is valid, False otherwise.</span>
 <a id="__codelineno-0-176" name="__codelineno-0-176"></a><span class="sd">    &quot;&quot;&quot;</span>
 <a id="__codelineno-0-177" name="__codelineno-0-177"></a>    <span class="c1"># Check if the Mode S field is mapped</span>
-<a id="__codelineno-0-178" name="__codelineno-0-178"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">combobox_dict</span><span class="p">[</span><span class="n">MODE_S_ADDRESS_KEY</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">==</span> <span class="n">NO_MAPPING_STRING</span><span class="p">:</span>
+<a id="__codelineno-0-178" name="__codelineno-0-178"></a>    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">combobox_dict</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">MODE_S_ADDRESS_KEY</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">NO_MAPPING_STRING</span><span class="p">:</span>
 <a id="__codelineno-0-179" name="__codelineno-0-179"></a>        <span class="c1"># If it isn&#39;t, show an error message</span>
 <a id="__codelineno-0-180" name="__codelineno-0-180"></a>        <span class="n">messagebox</span><span class="o">.</span><span class="n">showerror</span><span class="p">(</span><span class="s1">&#39;Error&#39;</span><span class="p">,</span> <span class="s1">&#39;ModeSCode field must be mapped&#39;</span><span class="p">)</span>
 <a id="__codelineno-0-181" name="__codelineno-0-181"></a>
@@ -1304,10 +1304,10 @@
 <a id="__codelineno-0-145" name="__codelineno-0-145"></a>        <span class="n">new_mapping</span> <span class="o">=</span> <span class="p">{</span><span class="n">field</span><span class="p">:</span> <span class="n">mapping</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="k">for</span> <span class="n">field</span><span class="p">,</span> <span class="n">mapping</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">combobox_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
 <a id="__codelineno-0-146" name="__codelineno-0-146"></a>
 <a id="__codelineno-0-147" name="__codelineno-0-147"></a>        <span class="c1"># Create the defaults directory if it doesn&#39;t exist</span>
-<a id="__codelineno-0-148" name="__codelineno-0-148"></a>        <span class="n">DEFAULT_MAPPING_PATH</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-0-148" name="__codelineno-0-148"></a>        <span class="n">constants</span><span class="o">.</span><span class="n">DEFAULT_MAPPING_PATH</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <a id="__codelineno-0-149" name="__codelineno-0-149"></a>
 <a id="__codelineno-0-150" name="__codelineno-0-150"></a>        <span class="c1"># Save the new mapping</span>
-<a id="__codelineno-0-151" name="__codelineno-0-151"></a>        <span class="k">with</span> <span class="n">DEFAULT_MAPPING_PATH</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">default_mapping_file</span><span class="p">:</span>
+<a id="__codelineno-0-151" name="__codelineno-0-151"></a>        <span class="k">with</span> <span class="n">constants</span><span class="o">.</span><span class="n">DEFAULT_MAPPING_PATH</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">default_mapping_file</span><span class="p">:</span>
 <a id="__codelineno-0-152" name="__codelineno-0-152"></a>            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">new_mapping</span><span class="p">,</span> <span class="n">default_mapping_file</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <a id="__codelineno-0-153" name="__codelineno-0-153"></a>
 <a id="__codelineno-0-154" name="__codelineno-0-154"></a>        <span class="c1"># Show a success message</span>
@@ -1495,17 +1495,17 @@
 <a id="__codelineno-0-67" name="__codelineno-0-67"></a>        <span class="n">fieldnames</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fieldnames</span><span class="p">)</span>
 <a id="__codelineno-0-68" name="__codelineno-0-68"></a>
 <a id="__codelineno-0-69" name="__codelineno-0-69"></a>        <span class="c1"># Add Do not Map to the start of the list</span>
-<a id="__codelineno-0-70" name="__codelineno-0-70"></a>        <span class="n">fieldnames</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">NO_MAPPING_STRING</span><span class="p">)</span>
+<a id="__codelineno-0-70" name="__codelineno-0-70"></a>        <span class="n">fieldnames</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">NO_MAPPING_STRING</span><span class="p">)</span>
 <a id="__codelineno-0-71" name="__codelineno-0-71"></a>
 <a id="__codelineno-0-72" name="__codelineno-0-72"></a>        <span class="c1"># Iniialise the last row counter</span>
 <a id="__codelineno-0-73" name="__codelineno-0-73"></a>        <span class="n">last_row</span> <span class="o">=</span> <span class="mi">0</span>
 <a id="__codelineno-0-74" name="__codelineno-0-74"></a>
 <a id="__codelineno-0-75" name="__codelineno-0-75"></a>        <span class="c1"># Read the default mapping file, using the original mapping if the file doesn&#39;t exist</span>
-<a id="__codelineno-0-76" name="__codelineno-0-76"></a>        <span class="k">if</span> <span class="n">DEFAULT_MAPPING_PATH</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
-<a id="__codelineno-0-77" name="__codelineno-0-77"></a>            <span class="k">with</span> <span class="n">DEFAULT_MAPPING_PATH</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">default_mapping_file</span><span class="p">:</span>
+<a id="__codelineno-0-76" name="__codelineno-0-76"></a>        <span class="k">if</span> <span class="n">constants</span><span class="o">.</span><span class="n">DEFAULT_MAPPING_PATH</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+<a id="__codelineno-0-77" name="__codelineno-0-77"></a>            <span class="k">with</span> <span class="n">constants</span><span class="o">.</span><span class="n">DEFAULT_MAPPING_PATH</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">default_mapping_file</span><span class="p">:</span>
 <a id="__codelineno-0-78" name="__codelineno-0-78"></a>                <span class="bp">self</span><span class="o">.</span><span class="n">irca_mapping</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">default_mapping_file</span><span class="p">)</span>
 <a id="__codelineno-0-79" name="__codelineno-0-79"></a>        <span class="k">else</span><span class="p">:</span>
-<a id="__codelineno-0-80" name="__codelineno-0-80"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">irca_mapping</span> <span class="o">=</span> <span class="n">ORIGINAL_IRCA_MAPPING</span>
+<a id="__codelineno-0-80" name="__codelineno-0-80"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">irca_mapping</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">ORIGINAL_IRCA_MAPPING</span>
 <a id="__codelineno-0-81" name="__codelineno-0-81"></a>
 <a id="__codelineno-0-82" name="__codelineno-0-82"></a>        <span class="c1"># Create the labels and comboboxes</span>
 <a id="__codelineno-0-83" name="__codelineno-0-83"></a>        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">mapping</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">irca_mapping</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
@@ -1611,10 +1611,10 @@
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
             </div>
             <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
               <div class="md-ellipsis">
-                <span class="md-footer__direction">
-                  Previous
-                </span>
                 Main Window
               </div>
             </div>
@@ -1624,10 +1624,10 @@
           
           <a href="progress_dialog.html" class="md-footer__link md-footer__link--next" aria-label="Next: Progress Dialog" rel="next">
             <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
               <div class="md-ellipsis">
-                <span class="md-footer__direction">
-                  Next
-                </span>
                 Progress Dialog
               </div>
             </div>
@@ -1663,7 +1663,7 @@
     <script id="__config" type="application/json">{"base": "..", "features": ["navigation.footer"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.19047be9.min.js"></script>
+      <script src="../assets/javascripts/bundle.51198bba.min.js"></script>
       
     
   </body>
