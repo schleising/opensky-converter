@@ -3,6 +3,7 @@
 
 import logging
 from pathlib import Path
+from tkinter import messagebox
 from typing import Dict
 
 import tkinter as tk
@@ -163,6 +164,9 @@ class ProgressDialog:
 
                 # Change the cancel button to close
                 self.cancel_button.configure(text='Close')
+
+                # Show the conversion complete message
+                messagebox.showinfo('Conversion Complete', 'The conversion has been completed successfully.')
 
     def cancel(self) -> None:
         """Cancels the conversion."""
