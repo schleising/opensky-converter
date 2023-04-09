@@ -13,7 +13,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.4">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.6">
     
     
       
@@ -21,7 +21,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.240905d7.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ded33207.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.a0c5b2b5.min.css">
@@ -840,7 +840,7 @@
 <a id="__codelineno-0-53" name="__codelineno-0-53"></a>        <span class="n">start_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
 <a id="__codelineno-0-54" name="__codelineno-0-54"></a>
 <a id="__codelineno-0-55" name="__codelineno-0-55"></a>        <span class="c1"># Run for 100 milliseconds</span>
-<a id="__codelineno-0-56" name="__codelineno-0-56"></a>        <span class="k">while</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span> <span class="o">&lt;</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">milliseconds</span><span class="o">=</span><span class="n">UI_REFRESH_TIME</span><span class="p">):</span>
+<a id="__codelineno-0-56" name="__codelineno-0-56"></a>        <span class="k">while</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span> <span class="o">&lt;</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">milliseconds</span><span class="o">=</span><span class="n">constants</span><span class="o">.</span><span class="n">UI_REFRESH_TIME</span><span class="p">):</span>
 <a id="__codelineno-0-57" name="__codelineno-0-57"></a>            <span class="c1"># Check if the file is closed</span>
 <a id="__codelineno-0-58" name="__codelineno-0-58"></a>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_file</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_file</span><span class="o">.</span><span class="n">closed</span><span class="p">:</span>
 <a id="__codelineno-0-59" name="__codelineno-0-59"></a>                <span class="k">break</span>
@@ -851,8 +851,8 @@
 <a id="__codelineno-0-64" name="__codelineno-0-64"></a>                <span class="n">row</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_file_reader</span><span class="p">)</span>
 <a id="__codelineno-0-65" name="__codelineno-0-65"></a>
 <a id="__codelineno-0-66" name="__codelineno-0-66"></a>                <span class="c1"># Add the row to the dictionary</span>
-<a id="__codelineno-0-67" name="__codelineno-0-67"></a>                <span class="k">if</span> <span class="n">MODE_S_ADDRESS_KEY</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
-<a id="__codelineno-0-68" name="__codelineno-0-68"></a>                    <span class="bp">self</span><span class="o">.</span><span class="n">current_file_data</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="n">MODE_S_ADDRESS_KEY</span><span class="p">]]</span> <span class="o">=</span> <span class="n">row</span>
+<a id="__codelineno-0-67" name="__codelineno-0-67"></a>                <span class="k">if</span> <span class="n">constants</span><span class="o">.</span><span class="n">MODE_S_ADDRESS_KEY</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
+<a id="__codelineno-0-68" name="__codelineno-0-68"></a>                    <span class="bp">self</span><span class="o">.</span><span class="n">current_file_data</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">MODE_S_ADDRESS_KEY</span><span class="p">]]</span> <span class="o">=</span> <span class="n">row</span>
 <a id="__codelineno-0-69" name="__codelineno-0-69"></a>
 <a id="__codelineno-0-70" name="__codelineno-0-70"></a>            <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
 <a id="__codelineno-0-71" name="__codelineno-0-71"></a>                <span class="c1"># Close the current file</span>
@@ -891,7 +891,7 @@
 <a id="__codelineno-0-104" name="__codelineno-0-104"></a>        <span class="n">start_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
 <a id="__codelineno-0-105" name="__codelineno-0-105"></a>
 <a id="__codelineno-0-106" name="__codelineno-0-106"></a>        <span class="c1"># Run for 100 milliseconds</span>
-<a id="__codelineno-0-107" name="__codelineno-0-107"></a>        <span class="k">while</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span> <span class="o">&lt;</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">milliseconds</span><span class="o">=</span><span class="n">UI_REFRESH_TIME</span><span class="p">):</span>
+<a id="__codelineno-0-107" name="__codelineno-0-107"></a>        <span class="k">while</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span> <span class="o">&lt;</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">milliseconds</span><span class="o">=</span><span class="n">constants</span><span class="o">.</span><span class="n">UI_REFRESH_TIME</span><span class="p">):</span>
 <a id="__codelineno-0-108" name="__codelineno-0-108"></a>            <span class="c1"># Check if the file is closed</span>
 <a id="__codelineno-0-109" name="__codelineno-0-109"></a>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">new_file</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">new_file</span><span class="o">.</span><span class="n">closed</span><span class="p">:</span>
 <a id="__codelineno-0-110" name="__codelineno-0-110"></a>                <span class="k">break</span>
@@ -902,10 +902,10 @@
 <a id="__codelineno-0-115" name="__codelineno-0-115"></a>                <span class="n">new_row</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">new_file_reader</span><span class="p">)</span>
 <a id="__codelineno-0-116" name="__codelineno-0-116"></a>
 <a id="__codelineno-0-117" name="__codelineno-0-117"></a>                <span class="c1"># Ensure the Mode S ID is in uppercase</span>
-<a id="__codelineno-0-118" name="__codelineno-0-118"></a>                <span class="n">new_row</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">[</span><span class="n">MODE_S_ADDRESS_KEY</span><span class="p">]]</span> <span class="o">=</span> <span class="n">new_row</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">[</span><span class="n">MODE_S_ADDRESS_KEY</span><span class="p">]]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+<a id="__codelineno-0-118" name="__codelineno-0-118"></a>                <span class="n">new_row</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">MODE_S_ADDRESS_KEY</span><span class="p">]]</span> <span class="o">=</span> <span class="n">new_row</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">MODE_S_ADDRESS_KEY</span><span class="p">]]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
 <a id="__codelineno-0-119" name="__codelineno-0-119"></a>
 <a id="__codelineno-0-120" name="__codelineno-0-120"></a>                <span class="c1"># Get the Mode S ID</span>
-<a id="__codelineno-0-121" name="__codelineno-0-121"></a>                <span class="n">mode_s_id</span> <span class="o">=</span> <span class="n">new_row</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">[</span><span class="n">MODE_S_ADDRESS_KEY</span><span class="p">]]</span>
+<a id="__codelineno-0-121" name="__codelineno-0-121"></a>                <span class="n">mode_s_id</span> <span class="o">=</span> <span class="n">new_row</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">MODE_S_ADDRESS_KEY</span><span class="p">]]</span>
 <a id="__codelineno-0-122" name="__codelineno-0-122"></a>
 <a id="__codelineno-0-123" name="__codelineno-0-123"></a>                <span class="c1"># Ensure there is actually a value in the Mode S ID</span>
 <a id="__codelineno-0-124" name="__codelineno-0-124"></a>                <span class="k">if</span> <span class="n">mode_s_id</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
@@ -922,7 +922,7 @@
 <a id="__codelineno-0-135" name="__codelineno-0-135"></a>                            <span class="bp">self</span><span class="o">.</span><span class="n">current_file_data</span><span class="p">[</span><span class="n">mode_s_id</span><span class="p">][</span><span class="n">irca_field</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 <a id="__codelineno-0-136" name="__codelineno-0-136"></a>
 <a id="__codelineno-0-137" name="__codelineno-0-137"></a>                        <span class="c1"># Check if data from the new row should overwrite the data in the current row</span>
-<a id="__codelineno-0-138" name="__codelineno-0-138"></a>                        <span class="k">if</span> <span class="n">new_field</span> <span class="o">!=</span> <span class="n">NO_MAPPING_STRING</span> <span class="ow">and</span> <span class="n">new_row</span><span class="p">[</span><span class="n">new_field</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+<a id="__codelineno-0-138" name="__codelineno-0-138"></a>                        <span class="k">if</span> <span class="n">new_field</span> <span class="o">!=</span> <span class="n">constants</span><span class="o">.</span><span class="n">NO_MAPPING_STRING</span> <span class="ow">and</span> <span class="n">new_row</span><span class="p">[</span><span class="n">new_field</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
 <a id="__codelineno-0-139" name="__codelineno-0-139"></a>                            <span class="c1"># Overwrite the data in the current row</span>
 <a id="__codelineno-0-140" name="__codelineno-0-140"></a>                            <span class="bp">self</span><span class="o">.</span><span class="n">current_file_data</span><span class="p">[</span><span class="n">mode_s_id</span><span class="p">][</span><span class="n">irca_field</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_row</span><span class="p">[</span><span class="n">new_field</span><span class="p">]</span>
 <a id="__codelineno-0-141" name="__codelineno-0-141"></a>
@@ -973,7 +973,7 @@
 <a id="__codelineno-0-186" name="__codelineno-0-186"></a>        <span class="n">start_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
 <a id="__codelineno-0-187" name="__codelineno-0-187"></a>
 <a id="__codelineno-0-188" name="__codelineno-0-188"></a>        <span class="c1"># Run for 100 milliseconds</span>
-<a id="__codelineno-0-189" name="__codelineno-0-189"></a>        <span class="k">while</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span> <span class="o">&lt;</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">milliseconds</span><span class="o">=</span><span class="n">UI_REFRESH_TIME</span><span class="p">):</span>
+<a id="__codelineno-0-189" name="__codelineno-0-189"></a>        <span class="k">while</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span> <span class="o">&lt;</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">milliseconds</span><span class="o">=</span><span class="n">constants</span><span class="o">.</span><span class="n">UI_REFRESH_TIME</span><span class="p">):</span>
 <a id="__codelineno-0-190" name="__codelineno-0-190"></a>            <span class="c1"># Check if the file is closed</span>
 <a id="__codelineno-0-191" name="__codelineno-0-191"></a>            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_file</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_file</span><span class="o">.</span><span class="n">closed</span><span class="p">:</span>
 <a id="__codelineno-0-192" name="__codelineno-0-192"></a>                <span class="k">break</span>
@@ -1275,7 +1275,7 @@
 <a id="__codelineno-0-104" name="__codelineno-0-104"></a>    <span class="n">start_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
 <a id="__codelineno-0-105" name="__codelineno-0-105"></a>
 <a id="__codelineno-0-106" name="__codelineno-0-106"></a>    <span class="c1"># Run for 100 milliseconds</span>
-<a id="__codelineno-0-107" name="__codelineno-0-107"></a>    <span class="k">while</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span> <span class="o">&lt;</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">milliseconds</span><span class="o">=</span><span class="n">UI_REFRESH_TIME</span><span class="p">):</span>
+<a id="__codelineno-0-107" name="__codelineno-0-107"></a>    <span class="k">while</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span> <span class="o">&lt;</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">milliseconds</span><span class="o">=</span><span class="n">constants</span><span class="o">.</span><span class="n">UI_REFRESH_TIME</span><span class="p">):</span>
 <a id="__codelineno-0-108" name="__codelineno-0-108"></a>        <span class="c1"># Check if the file is closed</span>
 <a id="__codelineno-0-109" name="__codelineno-0-109"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">new_file</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">new_file</span><span class="o">.</span><span class="n">closed</span><span class="p">:</span>
 <a id="__codelineno-0-110" name="__codelineno-0-110"></a>            <span class="k">break</span>
@@ -1286,10 +1286,10 @@
 <a id="__codelineno-0-115" name="__codelineno-0-115"></a>            <span class="n">new_row</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">new_file_reader</span><span class="p">)</span>
 <a id="__codelineno-0-116" name="__codelineno-0-116"></a>
 <a id="__codelineno-0-117" name="__codelineno-0-117"></a>            <span class="c1"># Ensure the Mode S ID is in uppercase</span>
-<a id="__codelineno-0-118" name="__codelineno-0-118"></a>            <span class="n">new_row</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">[</span><span class="n">MODE_S_ADDRESS_KEY</span><span class="p">]]</span> <span class="o">=</span> <span class="n">new_row</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">[</span><span class="n">MODE_S_ADDRESS_KEY</span><span class="p">]]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+<a id="__codelineno-0-118" name="__codelineno-0-118"></a>            <span class="n">new_row</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">MODE_S_ADDRESS_KEY</span><span class="p">]]</span> <span class="o">=</span> <span class="n">new_row</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">MODE_S_ADDRESS_KEY</span><span class="p">]]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
 <a id="__codelineno-0-119" name="__codelineno-0-119"></a>
 <a id="__codelineno-0-120" name="__codelineno-0-120"></a>            <span class="c1"># Get the Mode S ID</span>
-<a id="__codelineno-0-121" name="__codelineno-0-121"></a>            <span class="n">mode_s_id</span> <span class="o">=</span> <span class="n">new_row</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">[</span><span class="n">MODE_S_ADDRESS_KEY</span><span class="p">]]</span>
+<a id="__codelineno-0-121" name="__codelineno-0-121"></a>            <span class="n">mode_s_id</span> <span class="o">=</span> <span class="n">new_row</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">MODE_S_ADDRESS_KEY</span><span class="p">]]</span>
 <a id="__codelineno-0-122" name="__codelineno-0-122"></a>
 <a id="__codelineno-0-123" name="__codelineno-0-123"></a>            <span class="c1"># Ensure there is actually a value in the Mode S ID</span>
 <a id="__codelineno-0-124" name="__codelineno-0-124"></a>            <span class="k">if</span> <span class="n">mode_s_id</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
@@ -1306,7 +1306,7 @@
 <a id="__codelineno-0-135" name="__codelineno-0-135"></a>                        <span class="bp">self</span><span class="o">.</span><span class="n">current_file_data</span><span class="p">[</span><span class="n">mode_s_id</span><span class="p">][</span><span class="n">irca_field</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 <a id="__codelineno-0-136" name="__codelineno-0-136"></a>
 <a id="__codelineno-0-137" name="__codelineno-0-137"></a>                    <span class="c1"># Check if data from the new row should overwrite the data in the current row</span>
-<a id="__codelineno-0-138" name="__codelineno-0-138"></a>                    <span class="k">if</span> <span class="n">new_field</span> <span class="o">!=</span> <span class="n">NO_MAPPING_STRING</span> <span class="ow">and</span> <span class="n">new_row</span><span class="p">[</span><span class="n">new_field</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+<a id="__codelineno-0-138" name="__codelineno-0-138"></a>                    <span class="k">if</span> <span class="n">new_field</span> <span class="o">!=</span> <span class="n">constants</span><span class="o">.</span><span class="n">NO_MAPPING_STRING</span> <span class="ow">and</span> <span class="n">new_row</span><span class="p">[</span><span class="n">new_field</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
 <a id="__codelineno-0-139" name="__codelineno-0-139"></a>                        <span class="c1"># Overwrite the data in the current row</span>
 <a id="__codelineno-0-140" name="__codelineno-0-140"></a>                        <span class="bp">self</span><span class="o">.</span><span class="n">current_file_data</span><span class="p">[</span><span class="n">mode_s_id</span><span class="p">][</span><span class="n">irca_field</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_row</span><span class="p">[</span><span class="n">new_field</span><span class="p">]</span>
 <a id="__codelineno-0-141" name="__codelineno-0-141"></a>
@@ -1391,7 +1391,7 @@
 <a id="__codelineno-0-53" name="__codelineno-0-53"></a>    <span class="n">start_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
 <a id="__codelineno-0-54" name="__codelineno-0-54"></a>
 <a id="__codelineno-0-55" name="__codelineno-0-55"></a>    <span class="c1"># Run for 100 milliseconds</span>
-<a id="__codelineno-0-56" name="__codelineno-0-56"></a>    <span class="k">while</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span> <span class="o">&lt;</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">milliseconds</span><span class="o">=</span><span class="n">UI_REFRESH_TIME</span><span class="p">):</span>
+<a id="__codelineno-0-56" name="__codelineno-0-56"></a>    <span class="k">while</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span> <span class="o">&lt;</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">milliseconds</span><span class="o">=</span><span class="n">constants</span><span class="o">.</span><span class="n">UI_REFRESH_TIME</span><span class="p">):</span>
 <a id="__codelineno-0-57" name="__codelineno-0-57"></a>        <span class="c1"># Check if the file is closed</span>
 <a id="__codelineno-0-58" name="__codelineno-0-58"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_file</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_file</span><span class="o">.</span><span class="n">closed</span><span class="p">:</span>
 <a id="__codelineno-0-59" name="__codelineno-0-59"></a>            <span class="k">break</span>
@@ -1402,8 +1402,8 @@
 <a id="__codelineno-0-64" name="__codelineno-0-64"></a>            <span class="n">row</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_file_reader</span><span class="p">)</span>
 <a id="__codelineno-0-65" name="__codelineno-0-65"></a>
 <a id="__codelineno-0-66" name="__codelineno-0-66"></a>            <span class="c1"># Add the row to the dictionary</span>
-<a id="__codelineno-0-67" name="__codelineno-0-67"></a>            <span class="k">if</span> <span class="n">MODE_S_ADDRESS_KEY</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
-<a id="__codelineno-0-68" name="__codelineno-0-68"></a>                <span class="bp">self</span><span class="o">.</span><span class="n">current_file_data</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="n">MODE_S_ADDRESS_KEY</span><span class="p">]]</span> <span class="o">=</span> <span class="n">row</span>
+<a id="__codelineno-0-67" name="__codelineno-0-67"></a>            <span class="k">if</span> <span class="n">constants</span><span class="o">.</span><span class="n">MODE_S_ADDRESS_KEY</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
+<a id="__codelineno-0-68" name="__codelineno-0-68"></a>                <span class="bp">self</span><span class="o">.</span><span class="n">current_file_data</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">MODE_S_ADDRESS_KEY</span><span class="p">]]</span> <span class="o">=</span> <span class="n">row</span>
 <a id="__codelineno-0-69" name="__codelineno-0-69"></a>
 <a id="__codelineno-0-70" name="__codelineno-0-70"></a>        <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
 <a id="__codelineno-0-71" name="__codelineno-0-71"></a>            <span class="c1"># Close the current file</span>
@@ -1479,7 +1479,7 @@
 <a id="__codelineno-0-186" name="__codelineno-0-186"></a>    <span class="n">start_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
 <a id="__codelineno-0-187" name="__codelineno-0-187"></a>
 <a id="__codelineno-0-188" name="__codelineno-0-188"></a>    <span class="c1"># Run for 100 milliseconds</span>
-<a id="__codelineno-0-189" name="__codelineno-0-189"></a>    <span class="k">while</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span> <span class="o">&lt;</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">milliseconds</span><span class="o">=</span><span class="n">UI_REFRESH_TIME</span><span class="p">):</span>
+<a id="__codelineno-0-189" name="__codelineno-0-189"></a>    <span class="k">while</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span> <span class="o">&lt;</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">milliseconds</span><span class="o">=</span><span class="n">constants</span><span class="o">.</span><span class="n">UI_REFRESH_TIME</span><span class="p">):</span>
 <a id="__codelineno-0-190" name="__codelineno-0-190"></a>        <span class="c1"># Check if the file is closed</span>
 <a id="__codelineno-0-191" name="__codelineno-0-191"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_file</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_file</span><span class="o">.</span><span class="n">closed</span><span class="p">:</span>
 <a id="__codelineno-0-192" name="__codelineno-0-192"></a>            <span class="k">break</span>
@@ -1552,10 +1552,10 @@
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
             </div>
             <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
               <div class="md-ellipsis">
-                <span class="md-footer__direction">
-                  Previous
-                </span>
                 Reset to Defaults Dialog
               </div>
             </div>
@@ -1589,7 +1589,7 @@
     <script id="__config" type="application/json">{"base": "..", "features": ["navigation.footer"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.19047be9.min.js"></script>
+      <script src="../assets/javascripts/bundle.51198bba.min.js"></script>
       
     
   </body>
