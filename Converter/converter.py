@@ -41,7 +41,7 @@ class Converter:
         self.current_file = open(self.current_file_path, 'r', encoding='utf-8', newline='')
 
         # Create a reader for the current file
-        self.current_file_reader = csv.DictReader(self.current_file, delimiter=';')
+        self.current_file_reader = csv.DictReader(self.current_file, delimiter='\t')
 
         # Initialise the number of lines read to 0
         self.lines_read = 0
@@ -162,7 +162,8 @@ class Converter:
 
         # Create a writer for the output file
         if self.current_file_reader.fieldnames is not None:
-            self.output_file_writer = csv.DictWriter(self.output_file, fieldnames=self.current_file_reader.fieldnames)
+            # Create the writer
+            self.output_file_writer = csv.DictWriter(self.output_file, fieldnames=self.current_file_reader.fieldnames, delimiter='\t')
 
             # Write the header
             self.output_file_writer.writeheader()

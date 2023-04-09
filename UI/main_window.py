@@ -233,7 +233,7 @@ class MainWindow:
         # Open the current file
         with open(filename, 'r', encoding='utf-8', newline='') as current_file:
             # Create a dictionary reader
-            reader = csv.DictReader(current_file, delimiter=';')
+            reader = csv.DictReader(current_file, delimiter='\t')
 
             # Get the field names
             field_names = reader.fieldnames
