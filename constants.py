@@ -12,9 +12,9 @@ UI_REFRESH_TIME = 100 # The time in milliseconds to wait before refreshing the p
 # Default file paths
 BASE_PATH = Path(__file__).parent.absolute()
 HOME_PATH = Path.home().absolute() / 'AircraftDBConverter'
-ORIGINAL_IRCA_INPUT_FILENAME = 'Original IRCA Input.txt'
+ORIGINAL_IRCA_INPUT_FILENAME = 'Original IRCA Input.txt.zip'
 ORIGINAL_IRCA_INPUT_FILE_PATH = Path(f'{BASE_PATH}/defaults', ORIGINAL_IRCA_INPUT_FILENAME)
-ORIGINAL_MAPPING_PATH = Path(f'{BASE_PATH}/defaults/default_mapping.json')
+ORIGINAL_MAPPING_PATH = Path(f'{BASE_PATH}/defaults/default_mapping.json.zip')
 
 # Default paths
 DEFAULTS_PATH = Path(f'{HOME_PATH}/defaults')

@@ -124,10 +124,10 @@ class MainWindow:
                 Path(constants.DATABASE_PATH).mkdir(parents=True, exist_ok=True)
 
             # Log that the Original IRCA Input file is being copied
-            logging.info('Copying Original IRCA Input file to database folder')
+            logging.info('Unzipping Original IRCA Input file to database folder')
 
-            # Copy the file
-            shutil.copy2(constants.ORIGINAL_IRCA_INPUT_FILE_PATH, constants.DATABASE_PATH)
+            # Unzip and copy the file
+            shutil.unpack_archive(constants.ORIGINAL_IRCA_INPUT_FILE_PATH, constants.DATABASE_PATH)
 
         # Copy the default mapping file to the Aircraft DB Converter folder if it doesn't exist
         if not Path(constants.DEFAULT_MAPPING_PATH).exists():
@@ -136,10 +136,10 @@ class MainWindow:
                 Path(constants.DEFAULTS_PATH).mkdir(parents=True, exist_ok=True)
 
             # Log that the default mapping file is being copied
-            logging.info('Copying default mapping file to Aircraft DB Converter defaults folder')
+            logging.info('Unzipping default mapping file to Aircraft DB Converter defaults folder')
 
-            # Copy the file
-            shutil.copy2(constants.ORIGINAL_MAPPING_PATH, constants.DEFAULTS_PATH)
+            # Unzip and copy the file
+            shutil.unpack_archive(constants.ORIGINAL_MAPPING_PATH, constants.DEFAULTS_PATH)
 
     def setup_menu_bar(self) -> None:
         """Sets up the menu bar."""

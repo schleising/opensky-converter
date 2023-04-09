@@ -95,7 +95,7 @@ class ResetToDefaultsDialog:
             logging.info('Resetting current file')
 
             # Copy the original irca file to the database folder
-            shutil.copy2(constants.ORIGINAL_IRCA_INPUT_FILE_PATH, constants.DATABASE_PATH)
+            shutil.unpack_archive(constants.ORIGINAL_IRCA_INPUT_FILE_PATH, constants.DATABASE_PATH)
 
             # Add a message to the success message
             current_file_message = 'Current File'
