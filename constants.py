@@ -30,7 +30,7 @@ ICON_FILE_PATH = Path(f'{BASE_PATH}/resources/icon_512x512.png')
 DOCS_PATH = Path(f'{BASE_PATH}/site/index.html')
 
 # Log path
-LOG_PATH = Path(f'{HOME_PATH}/opensky-converter-log.txt')
+LOG_PATH = Path(f'{HOME_PATH}/aircraft-db-converter-log.txt')
 
 NO_MAPPING_STRING = 'Do not Map'
 
