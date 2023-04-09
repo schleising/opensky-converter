@@ -197,7 +197,7 @@ class MainWindow:
     def select_current_file(self) -> None:
         """Selects the current file."""
         # Get the filename
-        filename = filedialog.askopenfilename()
+        filename = filedialog.askopenfilename(initialdir=constants.DATABASE_PATH, title='Select Current File', filetypes=(('Text Files', '*.txt'), ('All Files', '*.*')))
 
         # Check if a filename was selected
         if filename:
@@ -254,7 +254,7 @@ class MainWindow:
     def select_new_file(self) -> None:
         """Selects the new file."""
         # Get the filename
-        filename = filedialog.askopenfilename()
+        filename = filedialog.askopenfilename(initialdir=constants.DATABASE_PATH, title='Select New File', filetypes=(('CSV Files', '*.csv'), ('All Files', '*.*')))
 
         # Check if a filename was selected
         if filename:
@@ -270,7 +270,7 @@ class MainWindow:
     def select_output_file(self) -> None:
         """Selects the output file."""
         # Get the filename
-        filename = filedialog.asksaveasfilename(initialfile='IRCA.txt', defaultextension='.txt')
+        filename = filedialog.asksaveasfilename(initialfile='IRCA.txt', defaultextension='.txt', initialdir=constants.DATABASE_PATH, title='Select Output File', filetypes=(('Text Files', '*.txt'), ('All Files', '*.*')))
 
         # Check if a filename was selected
         if filename:
