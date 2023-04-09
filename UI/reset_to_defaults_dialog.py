@@ -1,5 +1,6 @@
 """Dialog to reset the settings to defaults."""
 
+import shutil
 import json
 import logging
 import tkinter as tk
@@ -7,7 +8,7 @@ from tkinter import ttk
 from tkinter import messagebox
 from tkinter.simpledialog import _setup_dialog # type: ignore
 
-from .constants import ORIGINAL_IRCA_MAPPING, DEFAULT_MAPPING_PATH
+from . import constants
 
 class ResetToDefaultsDialog:
     def __init__(self, parent: tk.Tk) -> None:
@@ -83,10 +84,21 @@ class ResetToDefaultsDialog:
 
     def reset(self) -> None:
         """Resets the settings."""
+
+        current_file_message = ''
+        default_mapping_message = ''
+        success_message = ''
+
         # Reset the current file
         if self.current_file_checkbox_var.get():
             # Log that the current file has been reset
             logging.info('Resetting current file')
+
+            # Copy the original irca file to the database folder
+            shutil.copy2(constants.ORIGINAL_IRCA_INPUT_FILE_PATH, constants.DATABASE_PATH)
+
+            # Add a message to the success message
+            current_file_message = 'Current File'
 
         # Reset the mapping
         if self.mapping_checkbox_var.get():
@@ -94,14 +106,28 @@ class ResetToDefaultsDialog:
             logging.info('Resetting mapping')
 
             # Create the defaults directory if it doesn't exist
-            DEFAULT_MAPPING_PATH.parent.mkdir(parents=True, exist_ok=True)
+            constants.DEFAULT_MAPPING_PATH.parent.mkdir(parents=True, exist_ok=True)
 
             # Save the new mapping
-            with DEFAULT_MAPPING_PATH.open('w', encoding='utf8') as default_mapping_file:
-                json.dump(ORIGINAL_IRCA_MAPPING, default_mapping_file, indent=2)
+            with constants.DEFAULT_MAPPING_PATH.open('w', encoding='utf8') as default_mapping_file:
+                json.dump(constants.ORIGINAL_IRCA_MAPPING, default_mapping_file, indent=2)
 
-            # Show a success message
-            messagebox.showinfo('Success', 'Default mapping reset')
+            # Add a message to the success message
+            default_mapping_message = 'Default Mapping'
+
+        if current_file_message and default_mapping_message:
+            # Add an 'and' to the success message
+            success_message = f'{current_file_message} and {default_mapping_message} reset'
+        elif current_file_message:
+            # Add reset to the success message
+            success_message = f'{current_file_message} reset'
+        elif default_mapping_message:
+            # Add reset to the success message
+            success_message = f'{default_mapping_message} reset'
+
+        if success_message:
+            # Show the success message
+            messagebox.showinfo('Success', success_message)
 
         # Release the dialog
         self.dialog.grab_release()
