@@ -6,6 +6,7 @@ Classes:
     MainWindow: The main window for the application.
 """
 
+import shutil
 import csv
 from pathlib import Path
 import logging
@@ -115,6 +116,14 @@ class MainWindow:
 
         # Log that the main window has been created
         logging.debug('Main window created')
+
+        # Copy the Original IRCA Input file to the database folder if it doesn't exist
+        if not Path(constants.DATABASE_PATH, constants.ORIGINAL_IRCA_INPUT_FILENAME).exists():
+            # Log that the Original IRCA Input file is being copied
+            logging.info('Copying Original IRCA Input file to database folder')
+
+            # Copy the file
+            shutil.copy2(constants.ORIGINAL_IRCA_INPUT_FILE_PATH, constants.DATABASE_PATH)
 
     def setup_menu_bar(self) -> None:
         """Sets up the menu bar."""

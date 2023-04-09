@@ -1,5 +1,3 @@
-# The original IRCA mapping, used if the default mapping file doesn't exist or the user chooses to reset the mapping
-
 from pathlib import Path
 
 APPLICATION_NAME = 'Aircraft DB Converter'
@@ -10,6 +8,14 @@ WINDOWS_SYSTEM = 'win32'
 MACOS_SYSTEM = 'aqua'
 
 UI_REFRESH_TIME = 100 # The time in milliseconds to wait before refreshing the progress bars
+
+# Default file paths
+ORIGINAL_IRCA_INPUT_FILENAME = 'Original IRCA Input.txt'
+ORIGINAL_IRCA_INPUT_FILE_PATH = Path('defaults', ORIGINAL_IRCA_INPUT_FILENAME)
+DEFAULT_MAPPING_PATH = Path('defaults/default_mapping.json')
+
+# Database path
+DATABASE_PATH = Path('database')
 
 NO_MAPPING_STRING = 'Do not Map'
 
@@ -76,5 +82,3 @@ ORIGINAL_IRCA_MAPPING = {
     'PropellerModel': NO_MAPPING_STRING,
     'NCAAPropellerModel': NO_MAPPING_STRING,
 }
-
-DEFAULT_MAPPING_PATH = Path('defaults/default_mapping.json')
