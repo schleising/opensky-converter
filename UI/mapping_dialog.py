@@ -17,7 +17,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from tkinter.simpledialog import _setup_dialog # type: ignore
 
-from .constants import ORIGINAL_IRCA_MAPPING, DEFAULT_MAPPING_PATH, NO_MAPPING_STRING, MODE_S_ADDRESS_KEY
+import constants
 
 class MappingDialog:
     def __init__(self, parent: tk.Tk) -> None:
@@ -67,17 +67,17 @@ class MappingDialog:
             fieldnames = list(self.fieldnames)
 
             # Add Do not Map to the start of the list
-            fieldnames.insert(0, NO_MAPPING_STRING)
+            fieldnames.insert(0, constants.NO_MAPPING_STRING)
 
             # Iniialise the last row counter
             last_row = 0
 
             # Read the default mapping file, using the original mapping if the file doesn't exist
-            if DEFAULT_MAPPING_PATH.is_file():
-                with DEFAULT_MAPPING_PATH.open('r', encoding='utf8') as default_mapping_file:
+            if constants.DEFAULT_MAPPING_PATH.is_file():
+                with constants.DEFAULT_MAPPING_PATH.open('r', encoding='utf8') as default_mapping_file:
                     self.irca_mapping = json.load(default_mapping_file)
             else:
-                self.irca_mapping = ORIGINAL_IRCA_MAPPING
+                self.irca_mapping = constants.ORIGINAL_IRCA_MAPPING
 
             # Create the labels and comboboxes
             for i, (field, mapping) in enumerate(self.irca_mapping.items()):
@@ -145,10 +145,10 @@ class MappingDialog:
             new_mapping = {field: mapping.get() for field, mapping in self.combobox_dict.items()}
 
             # Create the defaults directory if it doesn't exist
-            DEFAULT_MAPPING_PATH.parent.mkdir(parents=True, exist_ok=True)
+            constants.DEFAULT_MAPPING_PATH.parent.mkdir(parents=True, exist_ok=True)
 
             # Save the new mapping
-            with DEFAULT_MAPPING_PATH.open('w', encoding='utf8') as default_mapping_file:
+            with constants.DEFAULT_MAPPING_PATH.open('w', encoding='utf8') as default_mapping_file:
                 json.dump(new_mapping, default_mapping_file, indent=2)
 
             # Show a success message
@@ -175,7 +175,7 @@ class MappingDialog:
             bool: True if the mapping is valid, False otherwise.
         """
         # Check if the Mode S field is mapped
-        if self.combobox_dict[MODE_S_ADDRESS_KEY].get() == NO_MAPPING_STRING:
+        if self.combobox_dict[constants.MODE_S_ADDRESS_KEY].get() == constants.NO_MAPPING_STRING:
             # If it isn't, show an error message
             messagebox.showerror('Error', 'ModeSCode field must be mapped')
 

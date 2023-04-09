@@ -10,12 +10,27 @@ MACOS_SYSTEM = 'aqua'
 UI_REFRESH_TIME = 100 # The time in milliseconds to wait before refreshing the progress bars
 
 # Default file paths
+BASE_PATH = Path(__file__).parent.absolute()
+HOME_PATH = Path.home().absolute() / 'AircraftDBConverter'
 ORIGINAL_IRCA_INPUT_FILENAME = 'Original IRCA Input.txt'
-ORIGINAL_IRCA_INPUT_FILE_PATH = Path('defaults', ORIGINAL_IRCA_INPUT_FILENAME)
-DEFAULT_MAPPING_PATH = Path('defaults/default_mapping.json')
+ORIGINAL_IRCA_INPUT_FILE_PATH = Path(f'{BASE_PATH}/defaults', ORIGINAL_IRCA_INPUT_FILENAME)
+ORIGINAL_MAPPING_PATH = Path(f'{BASE_PATH}/defaults/default_mapping.json')
+
+# Default paths
+DEFAULTS_PATH = Path(f'{HOME_PATH}/defaults')
+DEFAULT_MAPPING_PATH = Path(f'{HOME_PATH}/defaults/default_mapping.json')
 
 # Database path
-DATABASE_PATH = Path('database')
+DATABASE_PATH = Path(f'{HOME_PATH}/database')
+
+# Icon file
+ICON_FILE_PATH = Path(f'{BASE_PATH}/resources/icon_512x512.png')
+
+# Docs path
+DOCS_PATH = Path(f'{BASE_PATH}/site/index.html')
+
+# Log path
+LOG_PATH = Path(f'{HOME_PATH}/opensky-converter-log.txt')
 
 NO_MAPPING_STRING = 'Do not Map'
 

@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Dict, Tuple
 from datetime import datetime, timedelta
 
-from UI.constants import MODE_S_ADDRESS_KEY, UI_REFRESH_TIME, NO_MAPPING_STRING
+import constants
 
 class Converter:
     def __init__(self, current_file_path: Path, new_file_path: Path, output_file_path: Path, mapping: Dict[str, str]) -> None:
@@ -53,7 +53,7 @@ class Converter:
         start_time = datetime.now()
 
         # Run for 100 milliseconds
-        while datetime.now() - start_time < timedelta(milliseconds=UI_REFRESH_TIME):
+        while datetime.now() - start_time < timedelta(milliseconds=constants.UI_REFRESH_TIME):
             # Check if the file is closed
             if self.current_file is None or self.current_file.closed:
                 break
@@ -64,8 +64,8 @@ class Converter:
                 row = next(self.current_file_reader)
 
                 # Add the row to the dictionary
-                if MODE_S_ADDRESS_KEY in row:
-                    self.current_file_data[row[MODE_S_ADDRESS_KEY]] = row
+                if constants.MODE_S_ADDRESS_KEY in row:
+                    self.current_file_data[row[constants.MODE_S_ADDRESS_KEY]] = row
 
             except StopIteration:
                 # Close the current file
@@ -104,7 +104,7 @@ class Converter:
         start_time = datetime.now()
 
         # Run for 100 milliseconds
-        while datetime.now() - start_time < timedelta(milliseconds=UI_REFRESH_TIME):
+        while datetime.now() - start_time < timedelta(milliseconds=constants.UI_REFRESH_TIME):
             # Check if the file is closed
             if self.new_file is None or self.new_file.closed:
                 break
@@ -115,10 +115,10 @@ class Converter:
                 new_row = next(self.new_file_reader)
 
                 # Ensure the Mode S ID is in uppercase
-                new_row[self.mapping[MODE_S_ADDRESS_KEY]] = new_row[self.mapping[MODE_S_ADDRESS_KEY]].upper()
+                new_row[self.mapping[constants.MODE_S_ADDRESS_KEY]] = new_row[self.mapping[constants.MODE_S_ADDRESS_KEY]].upper()
 
                 # Get the Mode S ID
-                mode_s_id = new_row[self.mapping[MODE_S_ADDRESS_KEY]]
+                mode_s_id = new_row[self.mapping[constants.MODE_S_ADDRESS_KEY]]
 
                 # Ensure there is actually a value in the Mode S ID
                 if mode_s_id != '':
@@ -135,7 +135,7 @@ class Converter:
                             self.current_file_data[mode_s_id][irca_field] = ''
 
                         # Check if data from the new row should overwrite the data in the current row
-                        if new_field != NO_MAPPING_STRING and new_row[new_field] != '':
+                        if new_field != constants.NO_MAPPING_STRING and new_row[new_field] != '':
                             # Overwrite the data in the current row
                             self.current_file_data[mode_s_id][irca_field] = new_row[new_field]
 
@@ -186,7 +186,7 @@ class Converter:
         start_time = datetime.now()
 
         # Run for 100 milliseconds
-        while datetime.now() - start_time < timedelta(milliseconds=UI_REFRESH_TIME):
+        while datetime.now() - start_time < timedelta(milliseconds=constants.UI_REFRESH_TIME):
             # Check if the file is closed
             if self.output_file is None or self.output_file.closed:
                 break

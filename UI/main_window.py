@@ -18,7 +18,7 @@ from tkinter.simpledialog import _setup_dialog # type: ignore
 
 from . import MappingDialog, ProgressDialog, ResetToDefaultsDialog
 
-from . import constants
+import constants
 
 class MainWindow:
     def __init__(self, root: tk.Tk) -> None:
@@ -31,7 +31,7 @@ class MainWindow:
         self.root = root
 
         # Create the icon
-        photoimage = tk.PhotoImage(file='resources/icon_512x512.png')
+        photoimage = tk.PhotoImage(file=constants.ICON_FILE_PATH)
 
         # Set the icon
         self.root.wm_iconphoto(True, photoimage)
@@ -119,11 +119,27 @@ class MainWindow:
 
         # Copy the Original IRCA Input file to the database folder if it doesn't exist
         if not Path(constants.DATABASE_PATH, constants.ORIGINAL_IRCA_INPUT_FILENAME).exists():
+            # Create the database folder if it doesn't exist
+            if not Path(constants.DATABASE_PATH).exists():
+                Path(constants.DATABASE_PATH).mkdir(parents=True, exist_ok=True)
+
             # Log that the Original IRCA Input file is being copied
             logging.info('Copying Original IRCA Input file to database folder')
 
             # Copy the file
             shutil.copy2(constants.ORIGINAL_IRCA_INPUT_FILE_PATH, constants.DATABASE_PATH)
+
+        # Copy the default mapping file to the Aircraft DB Converter folder if it doesn't exist
+        if not Path(constants.DEFAULT_MAPPING_PATH).exists():
+            # Create the defaults path if it doesn't exist
+            if not Path(constants.DEFAULTS_PATH).exists():
+                Path(constants.DEFAULTS_PATH).mkdir(parents=True, exist_ok=True)
+
+            # Log that the default mapping file is being copied
+            logging.info('Copying default mapping file to Aircraft DB Converter defaults folder')
+
+            # Copy the file
+            shutil.copy2(constants.ORIGINAL_MAPPING_PATH, constants.DEFAULTS_PATH)
 
     def setup_menu_bar(self) -> None:
         """Sets up the menu bar."""
@@ -167,7 +183,7 @@ class MainWindow:
         logging.debug('Opening documentation')
 
         # Get the path to the documentation
-        docs_path = Path('site/index.html').absolute().as_posix()
+        docs_path = constants.DOCS_PATH.absolute().as_posix()
 
         # Log the documentation path
         logging.debug(f'Documentation path: {docs_path}')

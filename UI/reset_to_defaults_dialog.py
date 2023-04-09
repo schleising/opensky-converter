@@ -8,7 +8,7 @@ from tkinter import ttk
 from tkinter import messagebox
 from tkinter.simpledialog import _setup_dialog # type: ignore
 
-from . import constants
+import constants
 
 class ResetToDefaultsDialog:
     def __init__(self, parent: tk.Tk) -> None:
