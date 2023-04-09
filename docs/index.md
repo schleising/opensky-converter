@@ -1,48 +1,19 @@
-# OpenSky Converter
+## Overview
 
-## User Guide
+The AircraftDBConverter application is used to merge new data from sources such as the [OpenSky Network](https://opensky-network.org/) into the existing IRCA Aircraft DB File.
 
-### Main Window
-Click Image to see flowchart
+## Installation
 
-[![Main Window](Design/Main%20Window.png)](main_window.md)
+To see the installation instructions, please see the [Installation](guide/installation.md) page.
 
-!!! info "File Names"
-    - Current File is the file that is currently in use
-    - New File is the file that is being merged into the Current File
-    - Output File is the file that will be created
+## Usage
 
-1. Select the Current File
-2. Select the New File
-3. Select the Output File
-    - Once all files are selected the Set Mapping button will be enabled
-4. Select the Set Mapping button to open the Mapping Dialog
+To see the usage instructions, please see the [Main Window](guide/main_window.md) page.
 
-### Mapping Dialog
-Click image to see flowchart
+## Flowcharts
 
-[![Mapping Dialog](Design/Mapping%20Dialog.png)](mapping_dialog.md)
+The flowcharts section contains the flowcharts for the application, these can be used to help understand what the output of the application will be given a particular set of input files.
 
-5. Map the fields from the New File to the Current File
-6. The currently selected mapping can be saved as the default mapping
-7. Selecting Accept Mapping will close the dialog and enable the Convert button
-    - Selecting Cancel will close the dialog keeping the Convert button disabled
-8. Select Convert to open the Progress Dialog and start the conversion process
+## Reference
 
-### Progress Dialog
-Click image to see flowchart
-
-[![Progress Dialog](Design/Progress%20Dialog.png)](conversion_process.md)
-
-While conversion is in progress selecting cancel at any time will stop the conversion process and close the Progress Dialog
-
-### Reset to Defaults Dialog
-Click image to see flowchart
-
-[![Reset to Defaults](Design/Reset%20to%20Default%20Dialog.png)](reset_to_defaults.md)
-
-Selecting Reset to Defaults will open the Reset to Defaults Dialog
-
-- Choose whether to reset the Aircraft DB File, the Default Mapping, or both
-    - Selecting Reset will close the dialog and reset the selected items
-    - Selecting Cancel will close the dialog without resetting anything
+To see the reference documentation, please start with the [Main Window](reference/main_window.md) page.

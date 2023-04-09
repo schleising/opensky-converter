@@ -9,4 +9,4 @@ flowchart TD
     C --> D(Close Dialog)
 ```
 
-[![Reset to Defaults](Design/Reset%20to%20Default%20Dialog.png)](reset_to_defaults.md)
+[![Reset to Defaults](../Design/Reset%20to%20Default%20Dialog.png)](../flowcharts/reset_to_defaults.md)

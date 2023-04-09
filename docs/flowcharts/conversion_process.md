@@ -19,4 +19,4 @@ graph TD
     C -->|No More Rows| G[Write Output File]
 ```
 
-[![Progress Dialog](Design/Progress%20Dialog.png)](conversion_process.md)
+[![Progress Dialog](../Design/Progress%20Dialog.png)](../flowcharts/conversion_process.md)

@@ -30,4 +30,4 @@ flowchart TD
     P --> G
 ```
 
-[![Main Window](Design/Main%20Window.png)](main_window.md)
+[![Main Window](../Design/Main%20Window.png)](../flowcharts/main_window.md)

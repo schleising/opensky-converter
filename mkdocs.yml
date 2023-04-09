@@ -1,4 +1,4 @@
-site_name: OpenSky Converter
+site_name: Aircraft DB Converter
 
 site_url: ""
 
@@ -25,12 +25,18 @@ markdown_extensions:
   - pymdownx.snippets
 
 nav:
-  - User Guide: index.md
+  - Home: index.md
+  - User Guide:
+    - Installation: guide/installation.md
+    - Main Window: guide/main_window.md
+    - Mapping Dialog: guide/mapping_dialog.md
+    - Progress Dialog: guide/progress_dialog.md
+    - Reset to Defaults Dialog: guide/reset_to_defaults_dialog.md
   - Flowcharts:
-    - Main Window: main_window.md
-    - Mapping Dialog: mapping_dialog.md
-    - Conversion Process: conversion_process.md
-    - Reset to Defaults Dialog: reset_to_defaults.md
+    - Main Window: flowcharts/main_window.md
+    - Mapping Dialog: flowcharts/mapping_dialog.md
+    - Conversion Process: flowcharts/conversion_process.md
+    - Reset to Defaults Dialog: flowcharts/reset_to_defaults.md
   - Reference:
     - Main Window: reference/main_window.md
     - Mapping Dialog: reference/mapping_dialog.md

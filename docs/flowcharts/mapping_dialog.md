@@ -15,4 +15,4 @@ flowchart TD
     G -->|Select Cancel| I[Close Mapping Dialog]
 ```
 
-[![Mapping Dialog](Design/Mapping%20Dialog.png)](mapping_dialog.md)
+[![Mapping Dialog](../Design/Mapping%20Dialog.png)](../flowcharts/mapping_dialog.md)
