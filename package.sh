@@ -1,4 +1,9 @@
 #!/bin/zsh
+
+# Build the documentation
+mkdocs build
+
+# Generate the executable
 pyinstaller \
     --onedir \
     --name AircraftDBConverter \

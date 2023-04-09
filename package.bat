@@ -1,3 +1,9 @@
+REM Description: Build the application for distribution
+
+REM Build the docs
+mkdocs build
+
+REM Build the application
 pyinstaller ^
     --onedir ^
     --name AircraftDBConverter ^
