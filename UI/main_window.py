@@ -79,13 +79,13 @@ class MainWindow:
         self.output_file_entry.grid(column=1, row=2, sticky=tk.EW)
 
         # Create the buttons
-        self.current_file_button = ttk.Button(frame, text='Select File', command=self.select_current_file)
+        self.current_file_button = ttk.Button(frame, text='Select Current File', command=self.select_current_file)
         self.current_file_button.grid(column=2, row=0, sticky=tk.EW)
 
-        self.new_file_button = ttk.Button(frame, text='Select File', command=self.select_new_file)
+        self.new_file_button = ttk.Button(frame, text='Select New File', command=self.select_new_file)
         self.new_file_button.grid(column=2, row=1, sticky=tk.EW)
 
-        self.output_file_button = ttk.Button(frame, text='Select Filename', command=self.select_output_file, state=tk.DISABLED)
+        self.output_file_button = ttk.Button(frame, text='Set Output Filename', command=self.select_output_file, state=tk.DISABLED)
         self.output_file_button.grid(column=2, row=2, sticky=tk.EW)
 
         self.set_mappping_button = ttk.Button(frame, text='Set Mapping', state=tk.DISABLED, command=self.set_mapping)
