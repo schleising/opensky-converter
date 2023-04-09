@@ -878,7 +878,7 @@
 <a id="__codelineno-0-95" name="__codelineno-0-95"></a>            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Resetting current file&#39;</span><span class="p">)</span>
 <a id="__codelineno-0-96" name="__codelineno-0-96"></a>
 <a id="__codelineno-0-97" name="__codelineno-0-97"></a>            <span class="c1"># Copy the original irca file to the database folder</span>
-<a id="__codelineno-0-98" name="__codelineno-0-98"></a>            <span class="n">shutil</span><span class="o">.</span><span class="n">copy2</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">ORIGINAL_IRCA_INPUT_FILE_PATH</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">DATABASE_PATH</span><span class="p">)</span>
+<a id="__codelineno-0-98" name="__codelineno-0-98"></a>            <span class="n">shutil</span><span class="o">.</span><span class="n">unpack_archive</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">ORIGINAL_IRCA_INPUT_FILE_PATH</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">DATABASE_PATH</span><span class="p">)</span>
 <a id="__codelineno-0-99" name="__codelineno-0-99"></a>
 <a id="__codelineno-0-100" name="__codelineno-0-100"></a>            <span class="c1"># Add a message to the success message</span>
 <a id="__codelineno-0-101" name="__codelineno-0-101"></a>            <span class="n">current_file_message</span> <span class="o">=</span> <span class="s1">&#39;Current File&#39;</span>
@@ -1211,7 +1211,7 @@
 <a id="__codelineno-0-95" name="__codelineno-0-95"></a>        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Resetting current file&#39;</span><span class="p">)</span>
 <a id="__codelineno-0-96" name="__codelineno-0-96"></a>
 <a id="__codelineno-0-97" name="__codelineno-0-97"></a>        <span class="c1"># Copy the original irca file to the database folder</span>
-<a id="__codelineno-0-98" name="__codelineno-0-98"></a>        <span class="n">shutil</span><span class="o">.</span><span class="n">copy2</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">ORIGINAL_IRCA_INPUT_FILE_PATH</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">DATABASE_PATH</span><span class="p">)</span>
+<a id="__codelineno-0-98" name="__codelineno-0-98"></a>        <span class="n">shutil</span><span class="o">.</span><span class="n">unpack_archive</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">ORIGINAL_IRCA_INPUT_FILE_PATH</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">DATABASE_PATH</span><span class="p">)</span>
 <a id="__codelineno-0-99" name="__codelineno-0-99"></a>
 <a id="__codelineno-0-100" name="__codelineno-0-100"></a>        <span class="c1"># Add a message to the success message</span>
 <a id="__codelineno-0-101" name="__codelineno-0-101"></a>        <span class="n">current_file_message</span> <span class="o">=</span> <span class="s1">&#39;Current File&#39;</span>
