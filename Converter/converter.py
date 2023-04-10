@@ -168,29 +168,22 @@ class Converter:
         # Return the number of lines read
         return (self.lines_read / self.new_file_lines) * 100, True if self.new_file is None else not self.new_file.closed
 
-    def initialise_output_file(self) -> bool:
+    def initialise_output_file(self) -> None:
+        """Initialises the output file."""
         # Open the output file
         self.output_file = open(self.output_file_path, 'w', encoding='utf-8', newline='')
 
-        # Create a writer for the output file
-        if self.current_file_reader.fieldnames is not None:
-            # Create the writer
-            self.output_file_writer = csv.DictWriter(self.output_file, fieldnames=self.current_file_reader.fieldnames, delimiter=constants.DEFAULT_OUTPUT_FILE_DELIMITER)
+        # Create the writer
+        self.output_file_writer = csv.DictWriter(self.output_file, fieldnames=constants.ORIGINAL_IRCA_MAPPING.keys(), delimiter=constants.DEFAULT_OUTPUT_FILE_DELIMITER)
 
-            # Write the header
-            self.output_file_writer.writeheader()
+        # Write the header
+        self.output_file_writer.writeheader()
 
-            # Create a list of the rows to write
-            self.current_file_data_iterator = iter(list(self.current_file_data.values()))
+        # Create a list of the rows to write
+        self.current_file_data_iterator = iter(list(self.current_file_data.values()))
 
-            # Initialise the number of lines written to 0
-            self.lines_written = 0
-
-            # Return True
-            return True
-        else:
-            # Return False
-            return False
+        # Initialise the number of lines written to 0
+        self.lines_written = 0
 
     def write_output_file(self) -> Tuple[float, bool]:
         """Writes the output file."""
