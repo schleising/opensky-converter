@@ -159,6 +159,9 @@ class ProgressDialog:
                 # Continue writing the output file
                 self.parent.after(1, self.write_output_file)
             else:
+                # Emit the enable menu items event
+                self.parent.event_generate('<<EnableMenuItems>>')
+
                 # Set the progress bar to 100%
                 self.output_file_progress_bar.configure(value=100)
 
@@ -175,6 +178,9 @@ class ProgressDialog:
 
         # Set conversion cancelled to True
         self.conversion_cancelled = True
+
+        # Emit the enable menu items event
+        self.parent.event_generate('<<EnableMenuItems>>')
 
         # Destroy the dialog
         self.destroy()

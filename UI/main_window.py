@@ -42,6 +42,9 @@ class MainWindow:
         # Set up the menu bar
         self.setup_menu_bar()
 
+        # Bind enable menu items event
+        self.root.bind('<<EnableMenuItems>>', self.enable_menu_items)
+
         # Remove normal window decorations
         _setup_dialog(self.root)
 
@@ -171,6 +174,30 @@ class MainWindow:
 
         # Set the menu bar
         self.root.configure(menu=self.menu_bar)
+
+    def disable_menu_items(self) -> None:
+        """Disables the menu items that should be disabled."""
+        # Check if we are on macOS
+        if self.root.tk.call('tk', 'windowingsystem') == constants.MACOS_SYSTEM:
+            # Disable the menu items that should be disabled
+            self.apple_menu.entryconfig('About', state=tk.DISABLED)
+            self.apple_menu.entryconfig('Documentation', state=tk.DISABLED)
+        else:
+            # Disable the menu items that should be disabled
+            self.menu_bar.entryconfig('File', state=tk.DISABLED)
+            self.menu_bar.entryconfig('Help', state=tk.DISABLED)
+
+    def enable_menu_items(self, _) -> None:
+        """Enables the menu items that should be enabled."""
+        # Check if we are on macOS
+        if self.root.tk.call('tk', 'windowingsystem') == constants.MACOS_SYSTEM:
+            # Enable the menu items that should be enabled
+            self.apple_menu.entryconfig('About', state=tk.NORMAL)
+            self.apple_menu.entryconfig('Documentation', state=tk.NORMAL)
+        else:
+            # Enable the menu items that should be enabled
+            self.menu_bar.entryconfig('File', state=tk.NORMAL)
+            self.menu_bar.entryconfig('Help', state=tk.NORMAL)
 
     def show_about_dialog(self) -> None:
         """Shows the about dialog."""
@@ -332,6 +359,10 @@ class MainWindow:
     def convert(self) -> None:
         """Converts the current file to the new file."""
         if self.mapping_dialog.mapping is not None:
+            # Disable the menu items
+            self.disable_menu_items()
+
+            # Show the progress dialog
             ProgressDialog(self.root, self.current_file_path, self.new_file_path, self.output_file_path, self.mapping_dialog.mapping)
         else:
             # Display a message box
