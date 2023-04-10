@@ -82,14 +82,14 @@ class MappingDialog:
             # Create the labels and comboboxes
             for i, (field, mapping) in enumerate(self.irca_mapping.items()):
                 # Calculate the label column
-                label_column = (i % 3) * 2
+                label_column = (i % constants.MAPPING_DIALOG_COLUMNS) * constants.MAPPING_DIALOG_ITEMS_PER_COLUMN
 
                 # Create the label
                 label = ttk.Label(frame, text=field)
-                label.grid(row=i // 3, column=label_column, sticky=tk.W)
+                label.grid(row=i // constants.MAPPING_DIALOG_COLUMNS, column=label_column, sticky=tk.W)
 
                 # Calculate the combobox column
-                combobox_column = ((i % 3) * 2) + 1
+                combobox_column = ((i % constants.MAPPING_DIALOG_COLUMNS) * constants.MAPPING_DIALOG_ITEMS_PER_COLUMN) + 1
 
                 # Create the combobox
                 if mapping in fieldnames:
@@ -100,11 +100,11 @@ class MappingDialog:
                     self.combobox_dict[field] = tk.StringVar(value=constants.NO_MAPPING_STRING)
 
                 combobox = ttk.Combobox(frame, values=fieldnames_with_no_mapping, state='readonly', textvariable=self.combobox_dict[field])
-                combobox.grid(row=i // 3, column=combobox_column, sticky=tk.EW)
-                combobox.bind('<<ComboboxSelected>>', lambda event: event.widget.selection_clear())
+                combobox.grid(row=i // constants.MAPPING_DIALOG_COLUMNS, column=combobox_column, sticky=tk.EW)
+                combobox.bind(constants.COMBOBOX_SELECTED_EVENT, lambda event: event.widget.selection_clear())
 
                 # Update the last row counter
-                last_row = i // 2
+                last_row = i // constants.MAPPING_DIALOG_ITEMS_PER_COLUMN
 
             # Create the buttons
             accept_mapping_button = ttk.Button(frame, text='Accept Mapping', command=self.mapping_accepted)
@@ -169,7 +169,7 @@ class MappingDialog:
             self.mapping = {field: mapping.get() for field, mapping in self.combobox_dict.items()}
 
             # Generate the mapping accepted event
-            self.parent.event_generate('<<MappingAccepted>>', when='tail')
+            self.parent.event_generate(constants.MAPPING_ACCEPTED_EVENT, when='tail')
 
             # Close the dialog
             self.close_dialog()
@@ -198,7 +198,7 @@ class MappingDialog:
         """Handles the mapping being rejected.
         """
         # Generate the mapping rejected event
-        self.parent.event_generate('<<MappingRejected>>', when='tail')
+        self.parent.event_generate(constants.MAPPING_REJECTED_EVENT, when='tail')
 
         # Close the dialog
         self.close_dialog()

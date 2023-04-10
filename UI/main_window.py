@@ -43,7 +43,7 @@ class MainWindow:
         self.setup_menu_bar()
 
         # Bind enable menu items event
-        self.root.bind('<<EnableMenuItems>>', self.enable_menu_items)
+        self.root.bind(constants.ENABLE_MENU_ITEMS_EVENT, self.enable_menu_items)
 
         # Remove normal window decorations
         _setup_dialog(self.root)
@@ -114,8 +114,8 @@ class MainWindow:
         self.mapping_dialog = MappingDialog(self.root)
 
         # Bind the mapping dialog events
-        self.root.bind('<<MappingAccepted>>', self.mapping_accepted)
-        self.root.bind('<<MappingRejected>>', self.mapping_rejected)
+        self.root.bind(constants.MAPPING_ACCEPTED_EVENT, self.mapping_accepted)
+        self.root.bind(constants.MAPPING_REJECTED_EVENT, self.mapping_rejected)
 
         # Log that the main window has been created
         logging.debug('Main window created')

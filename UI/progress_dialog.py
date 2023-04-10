@@ -12,6 +12,8 @@ from tkinter.simpledialog import _setup_dialog # type: ignore
 
 from Converter import Converter
 
+import constants
+
 class ProgressDialog:
     def __init__(
             self, parent: tk.Tk,
@@ -63,13 +65,13 @@ class ProgressDialog:
         label.grid(column=0, row=2, sticky=tk.W)
 
         # Create the progress bars
-        self.current_file_progress_bar = ttk.Progressbar(frame, orient='horizontal', length=300, mode='determinate')
+        self.current_file_progress_bar = ttk.Progressbar(frame, orient=tk.HORIZONTAL, length=300, mode='determinate')
         self.current_file_progress_bar.grid(column=1, row=0, sticky=tk.EW)
 
-        self.new_file_progress_bar = ttk.Progressbar(frame, orient='horizontal', length=300, mode='determinate')
+        self.new_file_progress_bar = ttk.Progressbar(frame, orient=tk.HORIZONTAL, length=300, mode='determinate')
         self.new_file_progress_bar.grid(column=1, row=1, sticky=tk.EW)
 
-        self.output_file_progress_bar = ttk.Progressbar(frame, orient='horizontal', length=300, mode='determinate')
+        self.output_file_progress_bar = ttk.Progressbar(frame, orient=tk.HORIZONTAL, length=300, mode='determinate')
         self.output_file_progress_bar.grid(column=1, row=2, sticky=tk.EW)
 
         # Create the cancel button
@@ -181,7 +183,7 @@ class ProgressDialog:
                 self.parent.after(1, self.write_output_file)
             else:
                 # Emit the enable menu items event
-                self.parent.event_generate('<<EnableMenuItems>>')
+                self.parent.event_generate(constants.ENABLE_MENU_ITEMS_EVENT)
 
                 # Set the progress bar to 100%
                 self.output_file_progress_bar.configure(value=100)
@@ -201,7 +203,7 @@ class ProgressDialog:
         self.conversion_cancelled = True
 
         # Emit the enable menu items event
-        self.parent.event_generate('<<EnableMenuItems>>')
+        self.parent.event_generate(constants.ENABLE_MENU_ITEMS_EVENT)
 
         # Destroy the dialog
         self.destroy()

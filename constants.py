@@ -39,6 +39,16 @@ DEFAULT_NEW_FILE_DELIMITER = ','
 DEFAULT_OUTPUT_FILE_DELIMITER = '\t'
 DEFAULT_DELIMITERS = ',\t;'
 
+# Custom events
+ENABLE_MENU_ITEMS_EVENT = '<<EnableMenuItems>>'
+MAPPING_ACCEPTED_EVENT = '<<MappingAccepted>>'
+MAPPING_REJECTED_EVENT = '<<MappingRejected>>'
+COMBOBOX_SELECTED_EVENT = '<<ComboboxSelected>>'
+
+# Layout constants for mapping dialog
+MAPPING_DIALOG_COLUMNS = 3
+MAPPING_DIALOG_ITEMS_PER_COLUMN = 2
+
 NO_MAPPING_STRING = 'Do not Map'
 
 MODE_S_ADDRESS_KEY = 'ModeSCode'
