@@ -290,8 +290,18 @@ class MainWindow:
                     # Clear the filename
                     filename = ''
                 else:
+                    # Check that the delimiter is a tab
+                    if self.current_file_delimiter != constants.DEFAULT_CURRENT_FILE_DELIMITER:
+                        # Log that the delimiter of the current file is not a tab
+                        logging.error(f'The delimiter of the Current File {filename} is not a tab')
+
+                        # Display a message box
+                        messagebox.showerror('Error', 'The delimiter of the Current File is not a tab.\n\nPlease select a different file.')
+
+                        # Clear the filename
+                        filename = ''
                     # Check the field names in the current file match the field names in the default mapping
-                    if not self.check_field_names(filename):
+                    elif not self.check_field_names(filename):
                         # Display a message box
                         messagebox.showerror('Error', 'The field names in the Current File do not match the field names in the default mapping.\n\nPlease select a different file.')
 

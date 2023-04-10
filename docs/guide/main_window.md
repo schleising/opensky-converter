@@ -22,7 +22,7 @@ Click image to see process flowchart
         Once both files are selected the Output File button will be enabled
     !!! warning
         - The Current File must be a tab separated file in the IRCA format (This can be the supplied `Original IRCA File.txt` file or a file created by the application)
-        - The New File must be a comma separated file, it does not have to be in the IRCA format. The headings from this file will be used to populate the dropdowns in the [Mapping Dialog](mapping_dialog.md)
+        - The application will attempt to detect the format (dialect) of the New File, it does not have to be in the IRCA format. The headings from this file will be used to populate the dropdowns in the [Mapping Dialog](mapping_dialog.md)
 
         The application will not allow the user to continue if either file is not in the correct format
 
