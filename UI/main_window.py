@@ -120,6 +120,10 @@ class MainWindow:
         # Log that the main window has been created
         logging.debug('Main window created')
 
+        # Set the default delimiters
+        self.current_file_delimiter = constants.DEFAULT_CURRENT_FILE_DELIMITER
+        self.new_file_delimiter = constants.DEFAULT_NEW_FILE_DELIMITER
+
         # Copy the Original IRCA Input file to the database folder if it doesn't exist
         if not Path(constants.DATABASE_PATH, constants.ORIGINAL_IRCA_INPUT_FILENAME).exists():
             # Create the database folder if it doesn't exist
@@ -259,16 +263,43 @@ class MainWindow:
 
         # Check if a filename was selected
         if filename:
-            # Check the field names in the current file match the field names in the default mapping
-            if not self.check_field_names(filename):
-                # Display a message box
-                messagebox.showerror('Error', 'The field names in the current file do not match the field names in the default mapping.\n\nPlease select a different file.')
+            # Check the dialect of the current file
+            with open(filename, newline='') as csvfile:
+                try:
+                    # Try to determine the dialect of the current file
+                    dialect = csv.Sniffer().sniff(csvfile.read(constants.SNIFFER_READ_SIZE))
 
-                # Log that the field names in the current file do not match the field names in the default mapping
-                logging.error(f'The field names in the current file {filename} do not match the field names in the default mapping')
+                    # Set the current file delimiter
+                    self.current_file_delimiter = dialect.delimiter
+                except csv.Error:
+                    # Log that the dialect of the current file could not be determined
+                    logging.error(f'The dialect of the Current File {filename} could not be determined')
 
-                # Clear the filename
-                filename = ''
+                    # Display a message box
+                    messagebox.showerror('Error', 'The dialect of the Current File could not be determined.\n\nPlease select a different file.')
+
+                    # Clear the filename
+                    filename = ''
+                except UnicodeDecodeError:
+                    # Log that the current file does not look like a valid text file
+                    logging.error(f'{filename} does not look like a valid text file')
+
+                    # Display a message box
+                    messagebox.showerror('Error', 'The Current File does not look like a valid text file\n\nPlease select a different file.')
+
+                    # Clear the filename
+                    filename = ''
+                else:
+                    # Check the field names in the current file match the field names in the default mapping
+                    if not self.check_field_names(filename):
+                        # Display a message box
+                        messagebox.showerror('Error', 'The field names in the Current File do not match the field names in the default mapping.\n\nPlease select a different file.')
+
+                        # Log that the field names in the current file do not match the field names in the default mapping
+                        logging.error(f'The field names in the current file {filename} do not match the field names in the default mapping')
+
+                        # Clear the filename
+                        filename = ''
 
             # Set the current file path
             self.current_file_path = Path(filename)
@@ -291,7 +322,7 @@ class MainWindow:
         # Open the current file
         with open(filename, 'r', encoding='utf-8', newline='') as current_file:
             # Create a dictionary reader
-            reader = csv.DictReader(current_file, delimiter='\t')
+            reader = csv.DictReader(current_file, delimiter=self.current_file_delimiter)
 
             # Get the field names
             field_names = reader.fieldnames
@@ -316,6 +347,33 @@ class MainWindow:
 
         # Check if a filename was selected
         if filename:
+            # Check the dialect of the current file
+            with open(filename, newline='') as csvfile:
+                try:
+                    # Try to determine the dialect of the current file
+                    dialect = csv.Sniffer().sniff(csvfile.read(constants.SNIFFER_READ_SIZE))
+
+                    # Set the current file delimiter
+                    self.new_file_delimiter = dialect.delimiter
+                except csv.Error:
+                    # Log that the dialect of the current file could not be determined
+                    logging.error(f'The dialect of the New File {filename} could not be determined')
+
+                    # Display a message box
+                    messagebox.showerror('Error', 'The dialect of the New File could not be determined.\n\nPlease select a different file.')
+
+                    # Clear the filename
+                    filename = ''
+                except UnicodeDecodeError:
+                    # Log that the new file does not look like a valid text file
+                    logging.error(f'{filename} does not look like a valid text file')
+
+                    # Display a message box
+                    messagebox.showerror('Error', 'The New File does not look like a valid text file.\n\nPlease select a different file.')
+
+                    # Clear the filename
+                    filename = ''
+
             # Set the new file path
             self.new_file_path = Path(filename)
 
@@ -344,7 +402,7 @@ class MainWindow:
     def set_mapping(self) -> None:
         """Opens the set mapping dialog"""
         # Show the mapping dialog
-        self.mapping_dialog.show(self.new_file_path)
+        self.mapping_dialog.show(self.new_file_path, self.new_file_delimiter)
 
     def mapping_accepted(self, _) -> None:
         """Enables the convert button when the mapping is accepted."""
@@ -363,7 +421,15 @@ class MainWindow:
             self.disable_menu_items()
 
             # Show the progress dialog
-            ProgressDialog(self.root, self.current_file_path, self.new_file_path, self.output_file_path, self.mapping_dialog.mapping)
+            ProgressDialog(
+                self.root,
+                self.current_file_path,
+                self.current_file_delimiter,
+                self.new_file_path,
+                self.new_file_delimiter,
+                self.output_file_path,
+                self.mapping_dialog.mapping
+            )
         else:
             # Display a message box
             messagebox.showerror('Error', 'No mapping has been set.')

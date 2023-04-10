@@ -7,18 +7,30 @@ from datetime import datetime, timedelta
 import constants
 
 class Converter:
-    def __init__(self, current_file_path: Path, new_file_path: Path, output_file_path: Path, mapping: Dict[str, str]) -> None:
+    def __init__(
+            self,
+            current_file_path: Path,
+            current_file_delimiter: str,
+            new_file_path: Path,
+            new_file_delimiter: str,
+            output_file_path: Path,
+            mapping: Dict[str, str]
+        ) -> None:
         """Merges the New File into the Current File and outputs the result to the Output File.
 
         Args:
             current_file_path (Path): The existing aircraft database file.
+            current_file_delimiter (str): The delimiter of the existing database file.
             new_file_path (Path): The file containing new data to be merged into the existing database.
+            new_file_delimiter (str): The delimiter of the new file.
             output_file_path (Path): The file to output the merged data to.
             mapping (Dict[str, str]): The mapping of the new file's fieldnames to the current file's fieldnames.
         """
         # Store the file paths
         self.current_file_path = current_file_path
+        self.current_file_delimiter = current_file_delimiter
         self.new_file_path = new_file_path
+        self.new_file_delimiter = new_file_delimiter
         self.output_file_path = output_file_path
 
         # Store the mapping
@@ -41,7 +53,7 @@ class Converter:
         self.current_file = open(self.current_file_path, 'r', encoding='utf-8', newline='')
 
         # Create a reader for the current file
-        self.current_file_reader = csv.DictReader(self.current_file, delimiter='\t')
+        self.current_file_reader = csv.DictReader(self.current_file, delimiter=self.current_file_delimiter)
 
         # Initialise the number of lines read to 0
         self.lines_read = 0
@@ -93,7 +105,7 @@ class Converter:
         self.new_file = open(self.new_file_path, 'r', encoding='utf-8', newline='')
 
         # Create a reader for the new file
-        self.new_file_reader = csv.DictReader(self.new_file)
+        self.new_file_reader = csv.DictReader(self.new_file, delimiter=self.new_file_delimiter)
 
         # Initialise the number of lines read to 0
         self.lines_read = 0
@@ -163,7 +175,7 @@ class Converter:
         # Create a writer for the output file
         if self.current_file_reader.fieldnames is not None:
             # Create the writer
-            self.output_file_writer = csv.DictWriter(self.output_file, fieldnames=self.current_file_reader.fieldnames, delimiter='\t')
+            self.output_file_writer = csv.DictWriter(self.output_file, fieldnames=self.current_file_reader.fieldnames, delimiter=constants.DEFAULT_OUTPUT_FILE_DELIMITER)
 
             # Write the header
             self.output_file_writer.writeheader()

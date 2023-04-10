@@ -13,11 +13,25 @@ from tkinter.simpledialog import _setup_dialog # type: ignore
 from Converter import Converter
 
 class ProgressDialog:
-    def __init__(self, parent: tk.Tk, current_file_path: Path, new_file_path: Path, output_file_path: Path, mapping: Dict[str, str]) -> None:
+    def __init__(
+            self, parent: tk.Tk,
+            current_file_path: Path,
+            current_file_delimiter: str,
+            new_file_path: Path,
+            new_file_delimiter: str,
+            output_file_path: Path,
+            mapping: Dict[str, str]
+        ) -> None:
         """Creates the progress dialog.
 
         Args:
             parent (tk.Tk): The parent window.
+            current_file_path (Path): The path to the current file.
+            current_file_delimiter (str): The delimiter of the current file.
+            new_file_path (Path): The path to the new file.
+            new_file_delimiter (str): The delimiter of the new file.
+            output_file_path (Path): The path to the output file.
+            mapping (Dict[str, str]): The mapping of the fields.
         """
         # Store the parent window
         self.parent = parent
@@ -79,7 +93,14 @@ class ProgressDialog:
         self.conversion_cancelled = False
 
         # Create the converter
-        self.converter = Converter(current_file_path, new_file_path, output_file_path, mapping)
+        self.converter = Converter(
+            current_file_path,
+            current_file_delimiter,
+            new_file_path,
+            new_file_delimiter,
+            output_file_path,
+            mapping
+        )
 
         # Initialise the current file
         self.converter.initialise_current_file()

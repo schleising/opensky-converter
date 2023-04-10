@@ -32,6 +32,13 @@ DOCS_PATH = Path(f'{BASE_PATH}/site/index.html')
 # Log path
 LOG_PATH = Path(f'{HOME_PATH}/aircraft-db-converter-log.txt')
 
+# Dialect settings
+SNIFFER_READ_SIZE = 8192
+DEFAULT_CURRENT_FILE_DELIMITER = '\t'
+DEFAULT_NEW_FILE_DELIMITER = ','
+DEFAULT_OUTPUT_FILE_DELIMITER = '\t'
+DEFAULT_DELIMITERS = ',\t;'
+
 NO_MAPPING_STRING = 'Do not Map'
 
 MODE_S_ADDRESS_KEY = 'ModeSCode'

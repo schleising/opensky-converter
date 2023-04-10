@@ -32,7 +32,7 @@ class MappingDialog:
         # Initailise the mapping dictionary to None
         self.mapping: Union[Dict[str, str], None] = None
 
-    def show(self, new_file_path: Path) -> None:
+    def show(self, new_file_path: Path, new_file_delimeter) -> None:
         """Shows the mapping dialog.
 
         Args:
@@ -53,7 +53,7 @@ class MappingDialog:
 
         # Read the fieldnames from the new file
         with new_file_path.open('r', encoding='utf8', newline='') as new_file:
-            reader = csv.DictReader(new_file)
+            reader = csv.DictReader(new_file, delimiter=new_file_delimeter)
 
             self.fieldnames = reader.fieldnames
 
@@ -66,8 +66,8 @@ class MappingDialog:
             # Get the fieldnames as a list
             fieldnames = list(self.fieldnames)
 
-            # Add Do not Map to the start of the list
-            fieldnames.insert(0, constants.NO_MAPPING_STRING)
+            # Create a list of fieldnames with the 'Do not map' option at the start
+            fieldnames_with_no_mapping = [constants.NO_MAPPING_STRING] + fieldnames
 
             # Iniialise the last row counter
             last_row = 0
@@ -92,8 +92,14 @@ class MappingDialog:
                 combobox_column = ((i % 3) * 2) + 1
 
                 # Create the combobox
-                self.combobox_dict[field] = tk.StringVar(value=mapping)
-                combobox = ttk.Combobox(frame, values=fieldnames, state='readonly', textvariable=self.combobox_dict[field])
+                if mapping in fieldnames:
+                    self.combobox_dict[field] = tk.StringVar(value=mapping)
+                elif field in fieldnames:
+                    self.combobox_dict[field] = tk.StringVar(value=field)
+                else:
+                    self.combobox_dict[field] = tk.StringVar(value=constants.NO_MAPPING_STRING)
+
+                combobox = ttk.Combobox(frame, values=fieldnames_with_no_mapping, state='readonly', textvariable=self.combobox_dict[field])
                 combobox.grid(row=i // 3, column=combobox_column, sticky=tk.EW)
                 combobox.bind('<<ComboboxSelected>>', lambda event: event.widget.selection_clear())
 
