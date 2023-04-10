@@ -264,7 +264,7 @@ class MainWindow:
         # Check if a filename was selected
         if filename:
             # Check the dialect of the current file
-            with open(filename, newline='') as csvfile:
+            with open(filename, newline='', encoding='utf8') as csvfile:
                 try:
                     # Try to determine the dialect of the current file
                     dialect = csv.Sniffer().sniff(csvfile.read(constants.SNIFFER_READ_SIZE))
@@ -358,7 +358,7 @@ class MainWindow:
         # Check if a filename was selected
         if filename:
             # Check the dialect of the current file
-            with open(filename, newline='') as csvfile:
+            with open(filename, newline='', encoding='utf8') as csvfile:
                 try:
                     # Try to determine the dialect of the current file
                     dialect = csv.Sniffer().sniff(csvfile.read(constants.SNIFFER_READ_SIZE))

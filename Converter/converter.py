@@ -46,7 +46,7 @@ class Converter:
 
     def initialise_current_file(self) -> None:
         # Get the number of lines in the original file
-        with open(self.current_file_path, 'r') as current_file:
+        with open(self.current_file_path, 'r', encoding='utf8') as current_file:
             self.current_file_lines = len(current_file.readlines())
 
         # Open the current file
@@ -98,7 +98,7 @@ class Converter:
     
     def initialise_new_file(self) -> None:
         # Get the number of lines in the new file
-        with open(self.new_file_path, 'r') as new_file:
+        with open(self.new_file_path, 'r', encoding='utf8') as new_file:
             self.new_file_lines = len(new_file.readlines())
 
         # Open the new file
