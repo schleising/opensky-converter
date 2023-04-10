@@ -1,3 +1,5 @@
+"""File containing all the constants used in the application."""
+
 from pathlib import Path
 
 APPLICATION_NAME = 'Aircraft DB Converter'

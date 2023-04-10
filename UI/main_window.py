@@ -21,12 +21,12 @@ from . import MappingDialog, ProgressDialog, ResetToDefaultsDialog
 import constants
 
 class MainWindow:
-    def __init__(self, root: tk.Tk) -> None:
-        """Creates the main window.
+    """Creates the main window.
 
-        Args:
-            root (tk.Tk): The root window.
-        """
+    Args:
+        root (tk.Tk): The root window.
+    """
+    def __init__(self, root: tk.Tk) -> None:
         # Store the root window
         self.root = root
 

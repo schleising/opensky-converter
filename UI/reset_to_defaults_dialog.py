@@ -11,8 +11,12 @@ from tkinter.simpledialog import _setup_dialog # type: ignore
 import constants
 
 class ResetToDefaultsDialog:
+    """Creates the reset to default dialog.
+    
+    Args:
+        parent: The parent window.
+    """
     def __init__(self, parent: tk.Tk) -> None:
-        """Creates the reset to default dialog."""
         # Store the parent window
         self.parent = parent
 

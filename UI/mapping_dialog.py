@@ -20,12 +20,12 @@ from tkinter.simpledialog import _setup_dialog # type: ignore
 import constants
 
 class MappingDialog:
-    def __init__(self, parent: tk.Tk) -> None:
-        """Creates the mapping dialog.
+    """Creates the mapping dialog.
 
-        Args:
-            parent (tk.Tk): The parent window.
-        """
+    Args:
+        parent (tk.Tk): The parent window.
+    """
+    def __init__(self, parent: tk.Tk) -> None:
         # Store the parent window
         self.parent = parent
 
@@ -37,6 +37,7 @@ class MappingDialog:
 
         Args:
             new_file_path (Path): The path to the new file.
+            new_file_delimeter (str): The delimeter used in the new file.
         """
 
         # Create the dialog
@@ -143,8 +144,7 @@ class MappingDialog:
             logging.error(f'No fields found in new file {new_file_path.name}')
 
     def save_as_default(self) -> None:
-        """Handles the save as default button being clicked.
-        """
+        """Handles the save as default button being clicked."""
         # Check if the mapping is valid
         if self.check_mode_s_mapped():
             # Get the new mapping
@@ -161,8 +161,7 @@ class MappingDialog:
             messagebox.showinfo('Success', 'Default mapping saved')
 
     def mapping_accepted(self) -> None:
-        """Handles the mapping being accepted.
-        """
+        """Handles the mapping being accepted."""
         # Check if the mapping is valid
         if self.check_mode_s_mapped():
             # Get the new mapping
@@ -195,8 +194,7 @@ class MappingDialog:
         return True
 
     def mapping_rejected(self) -> None:
-        """Handles the mapping being rejected.
-        """
+        """Handles the mapping being rejected."""
         # Generate the mapping rejected event
         self.parent.event_generate(constants.MAPPING_REJECTED_EVENT, when='tail')
 
@@ -204,8 +202,7 @@ class MappingDialog:
         self.close_dialog()
 
     def close_dialog(self) -> None:
-        """Closes the dialog.
-        """
+        """Closes the dialog."""
         # Release the parent window
         self.dialog.grab_release()
 

@@ -15,6 +15,17 @@ from Converter import Converter
 import constants
 
 class ProgressDialog:
+    """Creates the progress dialog.
+
+    Args:
+        parent (tk.Tk): The parent window.
+        current_file_path (Path): The path to the current file.
+        current_file_delimiter (str): The delimiter of the current file.
+        new_file_path (Path): The path to the new file.
+        new_file_delimiter (str): The delimiter of the new file.
+        output_file_path (Path): The path to the output file.
+        mapping (Dict[str, str]): The mapping of the fields.
+    """
     def __init__(
             self, parent: tk.Tk,
             current_file_path: Path,
@@ -24,17 +35,6 @@ class ProgressDialog:
             output_file_path: Path,
             mapping: Dict[str, str]
         ) -> None:
-        """Creates the progress dialog.
-
-        Args:
-            parent (tk.Tk): The parent window.
-            current_file_path (Path): The path to the current file.
-            current_file_delimiter (str): The delimiter of the current file.
-            new_file_path (Path): The path to the new file.
-            new_file_delimiter (str): The delimiter of the new file.
-            output_file_path (Path): The path to the output file.
-            mapping (Dict[str, str]): The mapping of the fields.
-        """
         # Store the parent window
         self.parent = parent
 

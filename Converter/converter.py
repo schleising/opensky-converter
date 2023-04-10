@@ -1,3 +1,9 @@
+"""Merges the New File into the Current File and outputs the result to the Output File.
+
+Classes:
+    Converter: Merges the New File into the Current File and outputs the result to the Output File.
+"""
+
 import csv
 import logging
 from pathlib import Path
@@ -7,6 +13,16 @@ from datetime import datetime, timedelta
 import constants
 
 class Converter:
+    """Merges the New File into the Current File and outputs the result to the Output File.
+
+    Args:
+        current_file_path (Path): The existing aircraft database file.
+        current_file_delimiter (str): The delimiter of the existing database file.
+        new_file_path (Path): The file containing new data to be merged into the existing database.
+        new_file_delimiter (str): The delimiter of the new file.
+        output_file_path (Path): The file to output the merged data to.
+        mapping (Dict[str, str]): The mapping of the new file's fieldnames to the current file's fieldnames.
+    """
     def __init__(
             self,
             current_file_path: Path,
@@ -16,16 +32,6 @@ class Converter:
             output_file_path: Path,
             mapping: Dict[str, str]
         ) -> None:
-        """Merges the New File into the Current File and outputs the result to the Output File.
-
-        Args:
-            current_file_path (Path): The existing aircraft database file.
-            current_file_delimiter (str): The delimiter of the existing database file.
-            new_file_path (Path): The file containing new data to be merged into the existing database.
-            new_file_delimiter (str): The delimiter of the new file.
-            output_file_path (Path): The file to output the merged data to.
-            mapping (Dict[str, str]): The mapping of the new file's fieldnames to the current file's fieldnames.
-        """
         # Store the file paths
         self.current_file_path = current_file_path
         self.current_file_delimiter = current_file_delimiter
@@ -45,6 +51,7 @@ class Converter:
         self.output_file = None
 
     def initialise_current_file(self) -> None:
+        """Initialises the current file."""
         # Get the number of lines in the original file
         with open(self.current_file_path, 'r', encoding='utf8') as current_file:
             self.current_file_lines = len(current_file.readlines())
@@ -59,8 +66,14 @@ class Converter:
         self.lines_read = 0
 
     def read_current_file(self) -> Tuple[float, bool]:
-        """Reads the current file."""
-
+        """Reads the current file.
+        
+        Returns:
+            Tuple[float, bool]: The percentage of the current file read and whether the current file has been fully read.
+            
+        Notes:
+            The current file is read into a dictionary. The key is the Mode S ID and the value is the row.
+        """
         # Get the start time
         start_time = datetime.now()
 
@@ -97,6 +110,7 @@ class Converter:
         return (self.lines_read / self.current_file_lines) * 100, True if self.current_file is None else not self.current_file.closed
     
     def initialise_new_file(self) -> None:
+        """Initialises the new file."""
         # Get the number of lines in the new file
         with open(self.new_file_path, 'r', encoding='utf8') as new_file:
             self.new_file_lines = len(new_file.readlines())
@@ -111,7 +125,24 @@ class Converter:
         self.lines_read = 0
 
     def merge_new_file(self) -> Tuple[float, bool]:
-        """Merges the new file."""
+        """Merges the new file.
+        
+        Returns:
+            Tuple[float, bool]: The percentage of the new file read and whether the new file has been fully read.
+
+        Notes:
+            The new file is merged into the current file. If the Mode S ID is not in the current file, the row is added to the current file. If the Mode S ID is in the current file, the row is updated with the new data.
+
+            The Mode S ID is converted to uppercase before being used as a key.
+
+            The Mode S ID is not in the mapping, an error is logged and the row is skipped.
+
+            If the Mode S ID is not in the new file, an error is logged and the row is skipped.
+
+            If the Mode S ID is not in the current file, the row is added to the current file.
+
+            If the Mode S ID is in the current file, the row is updated with the new data.
+        """
         # Get the start time
         start_time = datetime.now()
 
@@ -186,7 +217,28 @@ class Converter:
         self.lines_written = 0
 
     def write_output_file(self) -> Tuple[float, bool]:
-        """Writes the output file."""
+        """Writes the output file.
+        
+        Returns:
+            Tuple[float, bool]: The percentage of the output file written and whether the output file has been fully written.
+            
+            Notes:
+                The output file is written to the output file path. The output file is written in the same format as the original IRCA file.
+                
+                The output file is written in chunks of 100 milliseconds. This is to ensure the UI is responsive.
+                
+                If the output file is closed, the function returns.
+                
+                If the output file is not closed, the next line is read from the output file. If the end of the file is reached, the output file is closed and the function returns.
+                
+                If the end of the file is not reached, the line is written to the output file and the number of lines written is incremented.
+                
+                The percentage of the output file written is calculated by dividing the number of lines written by the total number of lines in the output file.
+                
+                The function returns the percentage of the output file written and whether the output file has been fully written.
+                
+                The output file is fully written if the output file is closed.
+                """
         # Get the start time
         start_time = datetime.now()
 
